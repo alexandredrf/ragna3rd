@@ -1,0 +1,574 @@
+prontera,163,194,5	script	Loja de Utilidades	10079,{
+	if (@stuffs_cooldown >= gettimetick(2)) {
+		if (@stuffs_cooldown - gettimetick(2) > 31) {
+			@stuffs_cooldown = 0;
+		}
+		dispbottom "Espere 30 segundos para usar novamente.";
+		end;
+	}
+	@stuffs_cooldown = (gettimetick(2) + 30);
+	function stuffs;
+
+	stuffs(11548,0);//Poção Branca GdE
+	stuffs(11549,0);//Poção Azul GdE
+	stuffs(12016,0);//Poção do Vento
+	stuffs(12033,0);//Caixa da Luz do Sol
+	stuffs(12030,0);//Caixa do Ressentimento
+	stuffs(12031,0);//Caixa da Sonolência
+	stuffs(12029,0);//Caixa da Escuridão
+	stuffs(606,0);//Aloe Vera
+	stuffs(12020,0);//Agua Amaldiçoada
+	stuffs(12928,0);//Pergaminho de Aspercio
+	stuffs(12114,0);//Conversor Elemental Fogo 
+	stuffs(12115,0);//Conversor Elemental Água
+	stuffs(12116,0);//Conversor Elemental Terra
+	stuffs(12117,0);//Conversor Elemental Vento
+	stuffs(12118,0);//Poção Anti-Fogo
+	stuffs(12119,0);//Poção Anti-Água
+	stuffs(12120,0);//Poção Anti-Terra
+	stuffs(12121,0);//Poção Anti-Vento
+	stuffs(12414,0);//Bala de Guaraná
+	stuffs(645,0);//Poção da Concentração
+	switch(Class) {
+		case JOB_ACOLYTE:
+		case JOB_PRIEST:
+		case JOB_BARD:
+		case JOB_DANCER:
+			break;
+		default:
+			stuffs(656,0);//Poção do Despertar
+			break;
+	}
+	switch(Class) {
+		case JOB_ACOLYTE:
+		case JOB_ACOLYTE_HIGH:
+		case JOB_BABY_ACOLYTE:
+		case JOB_PRIEST:
+		case JOB_HIGH_PRIEST:
+		case JOB_BABY_PRIEST:
+		case JOB_ARCH_BISHOP:
+		case JOB_ARCH_BISHOP_T:
+		case JOB_BABY_BISHOP:
+		case JOB_MONK:
+		case JOB_CHAMPION:
+		case JOB_BABY_MONK:
+		case JOB_SURA:
+		case JOB_SURA_T:
+		case JOB_BABY_SURA:
+		case JOB_THIEF:
+		case JOB_THIEF_HIGH:
+		case JOB_BABY_THIEF:
+		case JOB_ASSASSIN:
+		case JOB_ASSASSIN_CROSS:
+		case JOB_BABY_ASSASSIN:
+		case JOB_GUILLOTINE_CROSS:
+		case JOB_GUILLOTINE_CROSS_T:
+		case JOB_BABY_CROSS:
+		case JOB_ARCHER:
+		case JOB_ARCHER_HIGH:
+		case JOB_BABY_ARCHER:
+		case JOB_HUNTER:
+		case JOB_SNIPER:
+		case JOB_BABY_HUNTER:
+		case JOB_RANGER:
+		case JOB_RANGER_T:
+		case JOB_BABY_RANGER:
+		case JOB_BARD:
+		case JOB_CLOWN:
+		case JOB_BABY_BARD:
+		case JOB_MINSTREL:
+		case JOB_MINSTREL_T:
+		case JOB_BABY_MINSTREL:
+		case JOB_DANCER:
+		case JOB_GYPSY:
+		case JOB_BABY_DANCER:
+		case JOB_WANDERER:
+		case JOB_WANDERER_T:
+		case JOB_BABY_WANDERER:
+		case JOB_MAGE:
+		case JOB_MAGE_HIGH:
+		case JOB_BABY_MAGE:
+		case JOB_SAGE:
+		case JOB_PROFESSOR:
+		case JOB_BABY_SAGE:
+		case JOB_SORCERER:
+		case JOB_SORCERER_T:
+		case JOB_BABY_SORCERER:
+		case JOB_NOVICE:
+		case JOB_NOVICE_HIGH:
+		case JOB_BABY:
+		case JOB_SUPER_NOVICE:
+		case JOB_SUPER_BABY:
+		case JOB_SUPER_NOVICE_E:
+		case JOB_SUPER_BABY_E:
+		case JOB_NINJA:
+		case JOB_KAGEROU:
+		case JOB_OBORO:
+			break;
+		default:
+			stuffs(657,0);//Poção da Fúria Selvagem
+			break;
+	}
+	stuffs(12375,0);//Acarajé
+	/*
+	switch(Class) {
+		case JOB_NOVICE:
+		case JOB_SUPER_NOVICE:
+		case JOB_NOVICE_HIGH:
+		case JOB_BABY:
+		case JOB_SUPER_BABY:
+		case JOB_SUPER_NOVICE_E:
+		case JOB_SUPER_BABY_E:
+		case JOB_SWORDMAN:
+		case JOB_KNIGHT:
+		case JOB_CRUSADER:
+		case JOB_SWORDMAN_HIGH:
+		case JOB_LORD_KNIGHT:
+		case JOB_PALADIN:
+		case JOB_BABY_SWORDMAN:
+		case JOB_BABY_KNIGHT:
+		case JOB_BABY_CRUSADER:
+		case JOB_RUNE_KNIGHT:
+		case JOB_RUNE_KNIGHT_T:
+		case JOB_ROYAL_GUARD:
+		case JOB_ROYAL_GUARD_T:
+		case JOB_BABY_RUNE:
+		case JOB_BABY_GUARD:
+		case JOB_ACOLYTE:
+		case JOB_PRIEST:
+		case JOB_MONK:
+		case JOB_ACOLYTE_HIGH:
+		case JOB_HIGH_PRIEST:
+		case JOB_CHAMPION:
+		case JOB_BABY_ACOLYTE:
+		case JOB_BABY_PRIEST:
+		case JOB_BABY_MONK:
+		case JOB_ARCH_BISHOP:
+		case JOB_ARCH_BISHOP_T:
+		case JOB_SURA:
+		case JOB_SURA_T:
+		case JOB_BABY_BISHOP:
+		case JOB_BABY_SURA:
+		case JOB_MERCHANT:
+		case JOB_BLACKSMITH:
+		case JOB_ALCHEMIST:
+		case JOB_MERCHANT_HIGH:
+		case JOB_WHITESMITH:
+		case JOB_CREATOR:
+		case JOB_BABY_MERCHANT:
+		case JOB_BABY_BLACKSMITH:
+		case JOB_BABY_ALCHEMIST:
+		case JOB_MECHANIC:
+		case JOB_MECHANIC_T:
+		case JOB_GENETIC:
+		case JOB_GENETIC_T:
+		case JOB_BABY_MECHANIC:
+		case JOB_BABY_GENETIC:
+			stuffs(12220,0);//pergaminho de Adrenalina
+			break;
+	}
+	*/
+	stuffs(12274,0);//Pílula de HP
+	stuffs(12275,0);//Pílula de SP
+	stuffs(12428,0);//Poção Branca Especial
+	stuffs(12436,0);//Poção Vitata
+	stuffs(12437,0);//Suco Celular Enriquecido
+	stuffs(12622,1);//Redeas
+	stuffs(714,0);//Emperium
+	switch(BaseJob) {
+		case JOB_PRIEST:
+		case JOB_WIZARD:
+		case JOB_SAGE:
+			stuffs(715, 0);//Gema Amarela
+			break;
+	}
+	switch(Class) {
+		case JOB_MAGE:
+		case JOB_MAGE_HIGH:
+		case JOB_BABY_MAGE:
+		case JOB_WIZARD:
+		case JOB_HIGH_WIZARD:
+		case JOB_BABY_WIZARD:
+		case JOB_WARLOCK:
+		case JOB_WARLOCK_T:
+		case JOB_BABY_WARLOCK:
+		case JOB_SAGE:
+		case JOB_PROFESSOR:
+		case JOB_BABY_SAGE:
+		case JOB_SORCERER:
+		case JOB_SORCERER_T:
+		case JOB_BABY_SORCERER:
+		case JOB_PRIEST:
+		case JOB_HIGH_PRIEST:
+		case JOB_BABY_PRIEST:
+		case JOB_ARCH_BISHOP:
+		case JOB_ARCH_BISHOP_T:
+		case JOB_BABY_BISHOP:
+		case JOB_ASSASSIN:
+		case JOB_BABY_ASSASSIN:
+		case JOB_ASSASSIN_CROSS:
+		case JOB_GUILLOTINE_CROSS:
+		case JOB_GUILLOTINE_CROSS_T:
+		case JOB_BABY_CROSS:
+		case JOB_ROGUE:
+		case JOB_BABY_ROGUE:
+		case JOB_STALKER:
+		case JOB_SHADOW_CHASER:
+		case JOB_SHADOW_CHASER_T:
+		case JOB_BABY_CHASER:
+			stuffs(716, 0);//Gema Vermelha
+			break;
+	}
+	switch(BaseClass) {
+		case JOB_MAGE:
+		case JOB_ACOLYTE:
+			stuffs(717,0);//Gema Azul
+			break;
+	}
+	switch(BaseJob) {
+		case JOB_SAGE:
+			stuffs(990,0);//Sangue Escarlate
+			stuffs(991,0);//Cristal Azul
+			stuffs(993,0);//Vida Verdejante
+			stuffs(992,0);//Frescor do Vento
+			break;
+	}
+	switch(Class) {
+		case JOB_PROFESSOR:
+		case JOB_SORCERER_T:
+			stuffs(1025,0);//Teia de Aranha
+			break;
+	}
+	switch(BaseJob) {
+		case JOB_ASSASSIN:
+			stuffs(1771,0);//Faca Envenenada
+			break;
+	}
+	switch(Class) {
+		case JOB_ASSASSIN_CROSS:
+		case JOB_GUILLOTINE_CROSS:
+		case JOB_GUILLOTINE_CROSS_T:
+			stuffs(678,0);//Garrafa de Veneno
+			break;
+	}
+	switch(Class) {
+		case JOB_PRIEST:
+		case JOB_HIGH_PRIEST:
+		case JOB_BABY_PRIEST:
+		case JOB_ARCH_BISHOP:
+		case JOB_ARCH_BISHOP_T:
+		case JOB_BABY_BISHOP:
+		case JOB_ROYAL_GUARD:
+		case JOB_ROYAL_GUARD_T:
+		case JOB_BABY_GUARD:
+			stuffs(523,0);//Água Benta
+			break;
+	}	
+	switch(Class) {
+		case JOB_ARCHER:
+		case JOB_HUNTER:
+		case JOB_ARCHER_HIGH:
+		case JOB_SNIPER:
+		case JOB_BABY_ARCHER:
+		case JOB_RANGER:
+		case JOB_RANGER_T:
+		case JOB_BABY_RANGER:
+		case JOB_BARD:
+		case JOB_CLOWN:
+		case JOB_BABY_BARD:
+		case JOB_MINSTREL:
+		case JOB_MINSTREL_T:
+		case JOB_DANCER:
+		case JOB_GYPSY:
+		case JOB_BABY_DANCER:
+		case JOB_WANDERER:
+		case JOB_WANDERER_T:
+		case JOB_SHADOW_CHASER:
+		case JOB_SHADOW_CHASER_T:
+		case JOB_BABY_CHASER:
+			stuffs(1750,0);//Flecha		
+			stuffs(1764,0);//Flecha Afiada
+			stuffs(1761,0);//Flecha Amaldiçoada
+			stuffs(1758,0);//Flecha Atordoante
+			stuffs(1759,0);//Flecha Congelante
+			stuffs(1753,0);//Flecha de Aço
+			stuffs(1774,0);//Flecha de Caça
+			stuffs(1776,0);//Flecha de Cerco A
+			stuffs(1775,0);//Flecha de Cerco S
+			stuffs(1754,0);//Flecha de Cristal
+			stuffs(1770,0);//Flecha de Ferro
+			stuffs(1752,0);//Flecha de Fogo
+			stuffs(1765,0);//Flecha de Oridecon
+			stuffs(1756,0);//Flecha de Pedra
+			stuffs(1751,0);//Flecha de Prata
+			stuffs(1755,0);//Flecha de Vento
+			stuffs(1766,0);//Flecha Dissipadora do Mal
+			stuffs(1773,0);//Flecha Élfica
+			stuffs(1769,0);//Flecha Emudecedora
+			stuffs(1762,0);//Flecha Enferrujada
+			stuffs(1763,0);//Flecha Envenenada
+			stuffs(1757,0);//Flecha Incorpórea
+			stuffs(1760,0);//Flecha Luminosa
+			stuffs(1772,0);//Flecha Sagrada
+			stuffs(1767,0);//Flecha Sombria
+			stuffs(1768,0);//Flecha Sonífera
+			break;
+	}
+	switch(BaseJob) {
+		case JOB_HUNTER:
+			stuffs(1065,0);//Armadilha
+	}
+	switch(Class) {
+		case JOB_RANGER:
+		case JOB_RANGER_T:
+		case JOB_BABY_RANGER:
+		case JOB_SHADOW_CHASER:
+		case JOB_SHADOW_CHASER_T:
+		case JOB_BABY_CHASER:
+			stuffs(7940,0);//Armadilha Especial
+			break;
+	}
+	switch(Class) {
+		case JOB_GUNSLINGER:
+		case JOB_REBELLION:
+			stuffs(13200,0);//Projétil
+			stuffs(13201,0);//Projétil de Prata
+			stuffs(13202,0);//Projétil Sanguinário
+			stuffs(13208,0);//Tatu Bola
+			stuffs(13203,0);//Esfera de Chamas
+			stuffs(13207,0);//Esfera Congelante
+			stuffs(13204,0);//Esfera de Relâmpagos
+			stuffs(13205,0);//Esfera Venenosa
+			stuffs(13206,0);//Esfera Cegante
+			break;
+	}
+	switch(Class) {
+		case JOB_NINJA:
+		case JOB_KAGEROU:
+		case JOB_OBORO:
+			stuffs(7524,0);//Esfera das Sombras
+			stuffs(7521,0);//Pedra do Fogo
+			stuffs(7522,0);//Pedra do Gelo
+			stuffs(7523,0);//Pedra do Vento
+			stuffs(13258,0);//Kunai Onda de Calor
+			stuffs(13255,0);//Kunai Nevasca
+			stuffs(13256,0);//Kunai Terra Negra
+			stuffs(13257,0);//Kunai Sopro do Vento
+			stuffs(13259,0);//Kunai Veneno Mortal
+			stuffs(13292,0);//Lula Seca
+			stuffs(13293,0);//Peixe Voador
+			stuffs(13251,0);//Shuriken Nebuloso
+			stuffs(13253,0);//Shuriken Folha Afiada
+			stuffs(13252,0);//Shuriken Relâmpago
+			stuffs(13254,0);//Shuriken Espinhos Retorcidos
+			stuffs(13250,0);//Shuriken
+			stuffs(13291,0);//Estrela-do-mar
+			break;
+	}
+	switch(Class) {
+		case JOB_KAGEROU:
+		case JOB_OBORO:
+			stuffs(6512,0);//Amuleto Espiritual de Fogo
+			stuffs(6513,0);//Amuleto Espiritual de Gelo
+			stuffs(6515,0);//Amuleto Espiritual de Terra
+			stuffs(6514,0);//Amuleto Espiritual de Vento
+			stuffs(13294,0);//Kunai Explosiva
+			stuffs(6493,0);//Makibishi
+			break;
+	}		
+	switch(BaseJob) {
+		case JOB_ALCHEMIST:
+			stuffs(7135,0);//Frasco de Fogo Grego
+			stuffs(7136,0);//Frasco de Ácido
+			stuffs(7139,0);//Frasco de Revestimento
+			stuffs(7137,0);//Frasco de Planta Carnívora
+			stuffs(7138,0);//Frasco de Esfera Marinha
+			break;
+	}
+	switch(Class) {
+		case JOB_RUNE_KNIGHT:
+		case JOB_RUNE_KNIGHT_T:
+		case JOB_BABY_RUNE:
+			stuffs(12729,0);//Runa Othila
+			stuffs(12733,0);//Runa Hagalaz
+			stuffs(12727,0);//Runa Berkana
+			stuffs(12732,0);//Runa Wyrd
+			stuffs(12731,0);//Runa Thurisaz
+			stuffs(12726,0);//Runa Raido
+			stuffs(12725,0);//Runa Nauthiz
+			stuffs(12730,0);//Runa Uruz
+			stuffs(12728,0);//Runa Isa
+			stuffs(22540,0);//Runa Luxanima
+			break;
+	}
+	switch(Class) {
+		case JOB_WARLOCK:
+		case JOB_WARLOCK_T:
+		case JOB_BABY_WARLOCK:
+			stuffs(6190,1);//Grimório de Lanças de Gelo
+			stuffs(6189,1);//Grimório de Lanças de Fogo
+			stuffs(6191,1);//Grimório de Relâmpago
+			stuffs(6201,1);//Grimório de Coluna de Pedra
+			stuffs(6200,1);//Grimório de Fúria da Terra
+			stuffs(6198,1);//Grimório de Trovão de Júpiter
+			stuffs(6197,1);//Grimório de Tempestade de Raios
+			stuffs(6193,1);//Grimório de Ira de Thor
+			stuffs(6194,1);//Grimório de Chuva de Meteoros
+			stuffs(6192,1);//Grimório de Nevasca
+			stuffs(6199,1);//Grimório de Esferas D'Água
+			stuffs(6203,1);//Grimório de Corrente Elétrica
+			stuffs(6204,1);//Grimório de Meteoro Escarlate
+			stuffs(6205,1);//Grimório de Drenar Vida
+			stuffs(6202,1);//Grimório de Abalo Sísmico
+			stuffs(6195,1);//Grimório de Cometa
+			stuffs(6196,1);//Grimório de Tetra Vortex
+			break;
+	}
+	switch(Class) {
+		case JOB_RANGER:
+		case JOB_RANGER_T:
+		case JOB_BABY_RANGER:
+		case JOB_MECHANIC:
+		case JOB_MECHANIC_T:
+		case JOB_BABY_MECHANIC:
+		case JOB_SORCERER:
+		case JOB_SORCERER_T:
+		case JOB_BABY_SORCERER:
+			stuffs(6360,0);//Fragmento Escarlate
+			stuffs(6363,0);//Fragmento Verde
+			stuffs(6362,0);//Fragmento Amarelo
+			stuffs(6361,0);//Fragmento Azul
+			break;
+	}
+	switch(Class) {
+		case JOB_RANGER:
+		case JOB_RANGER_T:
+		case JOB_BABY_RANGER:
+			stuffs(6124,0);//Flauta Uivante
+			break;
+	}
+	switch(Class) {
+		case JOB_ARCH_BISHOP:
+		case JOB_ARCH_BISHOP_T:
+		case JOB_BABY_BISHOP:
+			stuffs(12333,0);//Ancilla
+			break;
+	}
+	switch(Class) {
+		case JOB_MECHANIC:
+		case JOB_MECHANIC_T:
+		case JOB_BABY_MECHANIC:
+			stuffs(998,0);//Ferro
+			stuffs(999,0);//Aço
+			stuffs(615,0);//Martelo de Oridecon
+			stuffs(612,0);//Mini-Fornalha
+			stuffs(7054,0);//Brigan
+			stuffs(6186,0);//Chave Inglesa
+			stuffs(12392,0);//Reparador Leve
+			stuffs(12393,0);//Reparador Moderado
+			stuffs(12394,0);//Reparador Avançado
+			stuffs(6145,0);//Cápsula Incandescente
+			stuffs(6146,0);//Combustível Diferenciado Leve
+			stuffs(6147,0);//Cápsula de Nitrogênio Líquido
+			break;
+	}
+	switch(Class) {
+		case JOB_MECHANIC:
+		case JOB_MECHANIC_T:
+		case JOB_BABY_MECHANIC:
+		case JOB_GENETIC:
+		case JOB_GENETIC_T:
+		case JOB_BABY_GENETIC:
+			stuffs(18000,0);//Bala de Canhão
+			stuffs(18004,0);//Bala de Canhão de Ferro
+			stuffs(18003,0);//Bala de Canhão Fantasma
+			stuffs(18001,0);//Bala de Canhão Sagrada
+			stuffs(18002,0);//Bala de Canhão Sombria
+			break;
+	}
+	switch(Class) {
+		case JOB_GUILLOTINE_CROSS:
+		case JOB_GUILLOTINE_CROSS_T:
+		case JOB_BABY_CROSS:
+			stuffs(12717,0);//Curare
+			stuffs(12722,0);//Pirexia
+			stuffs(12720,0);//Squamata
+			stuffs(12718,0);//Vipera
+			stuffs(12724,0);//Beladona
+			stuffs(12723,0);//Waraitake
+			stuffs(12721,0);//Cicuta
+			stuffs(12719,0);//Oblivium
+			stuffs(6128,0);//Antídoto
+			break;
+	}
+	switch(Class) {
+		case JOB_SORCERER:
+		case JOB_SORCERER_T:
+		case JOB_BABY_SORCERER:
+			stuffs(994,0);//Coração Flamejante
+			stuffs(995,0);//Gelo Místico
+			stuffs(996,0);//Vento Bruto
+			stuffs(997,0);//Natureza Grandiosa
+			break;
+	}
+	switch(Class) {
+		case JOB_MINSTREL:
+		case JOB_WANDERER:
+		case JOB_MINSTREL_T:
+		case JOB_WANDERER_T:
+		case JOB_BABY_MINSTREL:
+		case JOB_BABY_WANDERER:
+		stuffs(6144,0);//Lágrimas de Arrependimento
+		stuffs(11513,0);//Pastilha Refrescante
+		break;
+	}
+	switch(Class) {
+		case JOB_GENETIC:
+		case JOB_GENETIC_T:
+		case JOB_BABY_GENETIC:
+			stuffs(13260,0);//Bomba de Maçã
+			stuffs(13263,0);//Bomba de Abacaxi
+			stuffs(13261,0);//Bomba de Coco
+			stuffs(13262,0);//Bomba de Melão
+			stuffs(13264,0);//Bomba de Banana
+			stuffs(13265,0);//Pedaço de Gororoba
+			stuffs(13266,0);//Pedaço de Gororoba Dura
+			stuffs(13267,0);//Pedaço de Gororoba Muito Dura
+			stuffs(13290,0);//Gororoba Preta
+			stuffs(13268,0);//Pó Misterioso
+			stuffs(6210,0);//Semente de Planta Selvagem
+			stuffs(6211,0);//Semente de Planta Sanguessuga
+			stuffs(6212,0);//Esporo de Cogumelo Explosivo
+			stuffs(6217,0);//Muda de Mandrágora
+			stuffs(970,0);//Álcool
+			stuffs(6216,0);//Garrafa com Óleo
+			stuffs(6213,0);//Pó Explosivo
+			stuffs(6214,0);//Gás de Fumaça
+			stuffs(6215,0);//Gás Lacrimejante
+			break;
+	}
+	switch(Class) {
+		case JOB_SHADOW_CHASER:
+		case JOB_SHADOW_CHASER_T:
+		case JOB_BABY_CHASER:
+			stuffs(6123,0);//Tinta para Parede
+			stuffs(6122,0);//Pincel de Grafite
+			stuffs(6120,0);//Tinta para Pele
+			stuffs(6121,0);//Pincel de Maquiagem
+			break;
+	}
+	if (countitem(2980) >= 1) {
+		stuffs(1025, 0);
+	}
+end;
+
+function	stuffs	{
+	.@item_id = getarg(0);
+	.@item_qnt = getarg(1);
+	if (.@item_qnt == 0 )
+		.@item_qnt = 30000;
+			delitem .@item_id, countitem(.@item_id);
+			getitem .@item_id, .@item_qnt - countitem(.@item_id);
+	return;
+}
+}

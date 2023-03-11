@@ -1,0 +1,19 @@
+prontera	mapflag	nochat
+izlude	mapflag	nochat
+aldebaran	mapflag	nochat
+morocc	mapflag	nochat
+geffen	mapflag	nochat
+payon	mapflag	nochat
+alberta	mapflag	nochat
+xmas	mapflag	nochat
+comodo	mapflag	nochat
+jawaii	mapflag	nochat
+ayothaya	mapflag	nochat
+einbroch	mapflag	nochat
+prt_in	mapflag	nochat
+
+// cheffênia/bossnia
+bossnia_01	mapflag	nochat
+bossnia_02	mapflag	nochat
+bossnia_03	mapflag	nochat
+bossnia_04	mapflag	nochat

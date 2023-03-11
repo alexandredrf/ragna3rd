@@ -1,0 +1,132 @@
+//===== FOX Ragnarök ======================================
+//= [ADM] odin | [ADM] well | [ADM] ramon
+//=========================================================
+
+prontera,153,192,4	script	Garota Galaxy	936,{
+
+	mes "^FF1493[  Garota Galaxy  ]^000000";
+	mes (gettime(3)>= 6&&gettime(3)<= 12?"Bom dia!":(gettime(3)>=13&&gettime(3)<=18?"Boa Tarde":"Boa Noite"))+", ^008aff"+strcharinfo(0)+"^000000 o que deseja?";
+
+	next;
+	switch(select("^00B2EE[  •  ]^000000 Funcionária Kafra:^00B2EE[  •  ]^000000 Habilidade Platina:^00B2EE[  •  ]^000000 Garota Negociante:^CD0000[  •  ]^000000 Cancelar"))
+	{
+	
+	case 1:
+	callfunc "F_KafSet";
+	mes "[ ^0000FFFuncionária Kafra^000000 ]";
+	mes "Bem vindo a";
+	mes "Corporação Kafra~";
+	mes "Os Serviços Kafras estão";
+	mes "sempre aqui para ajudar";
+	mes "você. Então, como posso";
+	mes "ajuda-lo hoje?";
+	callfunc "F_Kafra",5,0,0,40,800;
+	savepoint "prontera",156,191,1,1;
+	callfunc "F_KafEnd",0,1,"in the city of Prontera";
+	close;
+
+	case 2:
+	mes "^FF1493[  Habilidades Platinas  ]^000000";
+	mes (gettime(3)>= 6&&gettime(3)<= 12?"Bom dia!":(gettime(3)>=13&&gettime(3)<=18?"Boa Tarde":"Boa Noite"))+", você deseja receber suas habilidades extras?";
+	next;
+	if (select("^00B2EE[  •  ]^000000 Sim:^CD0000[  •  ]^000000 Não") == 2) {
+		mes "^FF1493[  Habilidades Platinas  ]^000000";
+		mes "Tudo bem ^00B2EE"+strcharinfo(0)+"^000000, bom jogo !";
+		close;
+	}
+	skill 142,1,0; // First Aid
+	if (BaseClass == Job_Novice) {
+		skill 143,1,0; // Play Dead
+	} else if (BaseClass == Job_Swordman) {
+		skill 144,1,0; // Moving HP-Recovery
+		skill 145,1,0; // Fatal Blow
+		skill 146,1,0; // Auto Berserk
+	} else if (BaseClass == Job_Mage) {
+		skill 157,1,0; // Energy Coat
+	} else if (BaseClass == Job_Archer) {
+		skill 147,1,0; // Arrow Crafting
+		skill 148,1,0; // Arrow Repel
+	} else if (BaseClass == Job_Merchant) {
+		skill 153,1,0; // Cart Revolution
+		skill 154,1,0; // Change Cart
+		skill 155,1,0; // Crazy Uproar
+	} else if (BaseClass == Job_Thief) {
+		skill 149,1,0; // Sand Attack
+		skill 150,1,0; // Back Slide
+		skill 151,1,0; // Find Stone
+		skill 152,1,0; // Stone Fling
+	} else if (BaseClass == Job_Acolyte) {
+		skill 156,1,0; // Holy Light
+	}
+	if (Class == Job_Knight || Class == Job_Lord_Knight) {
+		skill 1001,1,0; // Charge Attack
+	} else if (Class == Job_Crusader || Class == Job_Paladin) {
+		skill 1002,1,0; // Shrink
+	} else if (Class == Job_Wizard || Class == Job_High_Wizard) {
+		skill 1006,1,0; // Sight Blaster
+	} else if (Class == Job_Sage || Class == Job_Professor) {
+		skill 1007,1,0; // Create Elemental Converter
+		skill 1008,1,0; // Elemental Change Water
+		skill 1017,1,0; // Elemental Change Earth
+		skill 1018,1,0; // Elemental Change Fire
+		skill 1019,1,0; // Elemental Change Wind
+	} else if (Class == Job_Hunter || Class == Job_Sniper) {
+		skill 1009,1,0; // Phantasmic Arrow
+	} else if (Class == Job_Bard || Class == Job_Clown) {
+		skill 1010,1,0; // Pang Voice
+	} else if (Class == Job_Dancer || Class == Job_Gypsy) {
+		skill 1011,1,0; // Wink of Charm
+	} else if (Class == Job_Blacksmith || Class == Job_Whitesmith) {
+		skill 1012,1,0; // Unfair Trick
+		skill 1013,1,0; // Greed
+	} else if (Class == Job_Alchemist || Class == Job_Creator) {
+		skill 238,1,0; // Bioethics
+	} else if (Class == Job_Assassin || Class == Job_Assassin_Cross) {
+		skill 1003,1,0; // Sonic Acceleration
+		skill 1004,1,0; // Throw Venom Knife
+	} else if (Class == Job_Rogue || Class == Job_Stalker) {
+		skill 1005,1,0; // Close Confine
+	} else if (Class == Job_Priest || Class == Job_High_Priest) {
+		skill 1014,1,0; // Redemptio
+	} else if (Class == Job_Monk || Class == Job_Champion) {
+		skill 1015,1,0; // Ki Translation
+		skill 1016,1,0; // Ki Explosion
+	}
+	mes "^FF1493[  Habilidades Platinas  ]^000000";
+	mes "Ai está!";
+	close;
+	
+	case 3:
+	mes "^FF1493[  Garota Negociante  ]^000000";
+	if (ismounting()) {
+		message strcharinfo(0),"Você precisa primeiro remover sua montaria.";
+		end;
+	} else if (((eaclass()&EAJ_THIRDMASK)==EAJ_RANGER) && !countitem(6124)) {
+		if (!checkfalcon() && getskilllv("HT_FALCON") && !checkwug()) {
+			if(select("Falcão:Warg")==1) setfalcon;
+			else getitem 6124,1;
+		} else getitem 6124,1;
+	} else if (((eaclass()&EAJ_THIRDMASK)==EAJ_MECHANIC) && !checkcart() && getskilllv("MC_PUSHCART")) {
+		if (!checkmadogear() && getskilllv("NC_MADOLICENCE")) {
+			if(select("Carrinho:Madogear")==1) setcart;
+			else setmadogear;
+		} else setcart;
+	} else if (!checkcart() && getskilllv("MC_PUSHCART")) setcart;
+	else if (!checkfalcon() && getskilllv("HT_FALCON") && !checkwug()) setfalcon;
+	else if (!checkriding() && !checkdragon() && getskilllv("KN_RIDING")) {
+		if ((eaclass()&EAJ_THIRDMASK)==EAJ_RUNE_KNIGHT) setdragon;
+		else setriding;
+	} else if (!checkmadogear() && getskilllv("NC_MADOLICENCE")) setmadogear;
+	else {
+		message strcharinfo(0),"Você não cumpre os requisitos para alugar.";
+		end;
+	}
+	specialeffect2 EF_TEIHIT3;
+	close;
+
+	case 4:
+		mes "^FF1493[  Garota Galaxy  ]^000000";
+		mes "Tudo bem ^00B2EE"+strcharinfo(0)+"^000000, estarei aqui se você mudar de idéia.";
+		close;
+	}
+}

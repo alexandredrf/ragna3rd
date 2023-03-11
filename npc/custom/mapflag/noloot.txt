@@ -1,0 +1,19 @@
+prontera	mapflag	noloot
+prt_in	mapflag	noloot
+izlude	mapflag	noloot
+aldebaran	mapflag	noloot
+morocc	mapflag	noloot
+geffen	mapflag	noloot
+payon	mapflag	noloot
+alberta	mapflag	noloot
+xmas	mapflag	noloot
+comodo	mapflag	noloot
+jawaii	mapflag	noloot
+ayothaya	mapflag	noloot
+einbroch	mapflag	noloot
+
+// cheffênia/bossnia
+bossnia_01	mapflag	noloot
+bossnia_02	mapflag	noloot
+bossnia_03	mapflag	noloot
+bossnia_04	mapflag	noloot

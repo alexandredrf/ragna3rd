@@ -1,0 +1,22 @@
+-	script	Caveira#Pvp	-1,{
+
+OnPCKillEvent:
+ 
+
+if (getmapxy(@mapname$,@mapx,@mapy,0,strcharinfo(0)) == 0) {
+
+if (@mapname$ == "guild_vs3" || @mapname$ =="pvp_y_1-2")
+
+{
+
+getitem 7420,1;
+
+end;
+
+}
+
+end;
+
+}
+
+}

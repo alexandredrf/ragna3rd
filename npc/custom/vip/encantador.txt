@@ -1,0 +1,34 @@
+prontera,147,171,5	script	Encantador	936,{
+	deletearray @nome$[0],1; deletearray @encanto[0],1; deletearray @enc_type[0],14;
+	deletearray @parte[0],1; deletearray @equip_id[0],1; deletearray @tipo[0],1;
+	disable_items;
+	cutin "sarah_hero3.bmp",2;
+	set @nome$,"[^0000FF Encantador ^000000]"; //Salva no personagem para passar pelas funções sem perde-la...
+	mes @nome$;
+	if ( checkweight(1201,1) == 0 ){
+		mes "Você tem muitos tipos de objetos. Vamos tentar continuar depois de reduzir estes objetos.";
+		close;
+	}
+	if ( MaxWeight - Weight < 1000 ){
+		mes "Não pode continuar porque você tem muitos objetos pesados. Vamos tentar continaur depois de reduzir este peso.";
+		close;
+	}
+	mes "Olá, seja bem vindo, sou o encantador.","Selecione o item que deseja.";
+	next;
+	callfunc "F_EncSelItem";
+	mes @nome$;
+	if (!@tipo)
+		mes ""+getitemname(@equip_id)+" foi encantado(a) com ^FF00CC"+getitemname(@encanto)+"^000000";
+	else
+		mes ""+getitemname(@equip_id)+" foi resetado(a) com sucesso.";
+	
+	if ( countitem(@equip_id) == 1 && ( @parte == EQI_HAND_L && getiteminfo(@equip_id,5) == 2 ) == 0 ) {
+		equip @equip_id;
+	}
+	
+	//Delete arrays
+	deletearray @nome$[0],1; deletearray @encanto[0],1; deletearray @enc_type[0],14;
+	deletearray @parte[0],1; deletearray @equip_id[0],1; deletearray @tipo[0],1;
+	close2;
+	cutin "",255;
+}

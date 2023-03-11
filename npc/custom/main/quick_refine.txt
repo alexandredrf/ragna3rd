@@ -1,0 +1,57 @@
+prontera,147,175,5	script	Refino Rápido#1	826,{
+	if (@refine_cooldown >= gettimetick(2)) {
+		if (@refine_cooldown - gettimetick(2) > 4) {
+			@refine_cooldown = 0;
+		}
+		dispbottom "Espere 3 segundos para usar novamente.";
+		end;
+	}
+	setarray .@equip_pos[1],EQI_HEAD_TOP,EQI_HEAD_MID,EQI_HEAD_LOW,EQI_ARMOR,EQI_HAND_R,EQI_HAND_L,EQI_GARMENT,EQI_SHOES,EQI_ACC_R,EQI_ACC_L;
+	setarray .@shadow_pos[1],EQI_SHADOW_ARMOR,EQI_SHADOW_WEAPON,EQI_SHADOW_SHIELD,EQI_SHADOW_SHOES,EQI_SHADOW_ACC_R,EQI_SHADOW_ACC_L;
+	@refine_cooldown = (gettimetick(2) + 3);
+	for (.@i = 1; .@i <= getarraysize(.@equip_pos); ++.@i) {
+		if (getequipisequiped(.@equip_pos[.@i])) {
+			if (getequipisenableref(.@equip_pos[.@i])) {
+				if (getequiprefinerycnt(.@equip_pos[.@i]) < 9) {
+					successrefitem .@equip_pos[.@i], 9 - getequiprefinerycnt(.@equip_pos[.@i]);
+				}
+				else {
+					++.@count;
+				}
+			}
+			else {
+				++.@count;
+			}
+		}
+		else {
+			++.@count;
+		}
+	}
+
+	for (.@i = 1; .@i <= getarraysize(.@shadow_pos); ++.@i) {
+		if (getequipisequiped(.@shadow_pos[.@i])) {
+			if (getequipisenableref(.@shadow_pos[.@i])) {
+				if (getequiprefinerycnt(.@shadow_pos[.@i]) < 4) {
+					successrefitem .@shadow_pos[.@i], 4 - getequiprefinerycnt(.@shadow_pos[.@i]);
+				}
+				else {
+					++.@count;
+				}
+			}
+			else {
+				++.@count;
+			}
+		}
+		else {
+			++.@count;
+		}
+	}
+	if (.@count == getarraysize(.@equip_pos) + getarraysize(.@shadow_pos))
+		message strcharinfo(0), "Todos os seus itens já estão refinados para o mínimo.";
+	else
+		message strcharinfo(0), "Todos os seus itens foram refinados para o mínimo.";
+	end;
+
+OnInit:
+end;
+}

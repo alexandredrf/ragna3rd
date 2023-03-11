@@ -1,0 +1,19 @@
+prontera	mapflag	novending
+izlude	mapflag	novending
+aldebaran	mapflag	novending
+morocc	mapflag	novending
+geffen	mapflag	novending
+payon	mapflag	novending
+alberta	mapflag	novending
+xmas	mapflag	novending
+comodo	mapflag	novending
+jawaii	mapflag	novending
+ayothaya	mapflag	novending
+einbroch	mapflag	novending
+prt_in	mapflag	novending
+
+// cheffênia/bossnia
+bossnia_01	mapflag	novending
+bossnia_02	mapflag	novending
+bossnia_03	mapflag	novending
+bossnia_04	mapflag	novending

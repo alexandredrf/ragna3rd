@@ -1,0 +1,322 @@
+/**
+CREATE TABLE IF NOT EXISTS `ranking_mvp` (
+  `char_id` int(11) unsigned NOT NULL default '0',
+  `name` varchar(30) NOT NULL DEFAULT '',
+  `class` smallint(6) unsigned NOT NULL default '0',
+  `hair` tinyint(4) unsigned NOT NULL default '0',
+  `hair_color` smallint(5) unsigned NOT NULL default '0',
+  `clothes_color` smallint(5) unsigned NOT NULL default '0',
+  `body` smallint(5) unsigned NOT NULL default '0',
+  `kill` smallint(6) unsigned NOT NULL default '0',
+  `death` smallint(6) unsigned NOT NULL default '0',
+  `kdr` smallint(6) NOT NULL default '0',
+  PRIMARY KEY  (`char_id`)
+) ENGINE=MyISAM;
+*/
+
+prontera,148,182,5	script	Cheffênia#1	10141,{
+	function	MvPCount;
+	mes "Deseja entrar na cheffênia? Hahah~";
+	if (sex)
+		mes "Para um fracote até que você tem coragem, guri.";
+	else
+		mes "Para uma fracote até que você tem coragem, guria.";
+	mes "Que andar que deseja entrar?";
+	next;
+	.@choice = select("Cheffênia [^0000FF"+MvPCount()+"^000000]","Ranking MvP")-1;
+	if (.@choice) {
+		query_sql("SELECT `char_id`, `class`, `name`, `kill`,`death`,`kdr` FROM `"+.table$+"` ORDER BY `kdr` DESC LIMIT 20", .@char_id, .@class, .@name$, .@kill, .@death, .@kdr);
+			mes "====================";
+			for (.@i=0; .@i<getarraysize(.@class); .@i++) {
+				mes ""+(.@i+1)+": ["+jobname(.@class[.@i])+"]";
+				mes "Nome: ^FF0000"+.@name$[.@i]+"^000000";
+				mes "Pontuação: "+.@kill[.@i]+" - "+.@death[.@i]+" = "+.@kdr[.@i]+"";
+				mes "====================";
+			}
+			close3;
+	}
+	else {
+		set .@i, select("Primeiro [^0000FF"+getmapusers("bossnia_01")+"^000000]",
+						"Segundo [^0000FF"+getmapusers("bossnia_02")+"^000000]",
+						"Terceiro [^0000FF"+getmapusers("bossnia_03")+"^000000]",
+						"Quarto [^0000FF"+getmapusers("bossnia_04")+"^000000]");
+		mes "[ "+.nome$+" ]";
+		mes "Vou te enviar para lá agora.";
+		close2;
+		warp "bossnia_0" + .@i, rand(202,204), rand(202,204);
+		end;
+	}
+
+OnNPCKillEvent:
+	for (.@i = 1; .@i <= 4; ++.@i) {
+		if (strcharinfo(3) == "bossnia_0" + .@i) {
+			for (.@a = 0; .@a < getarraysize(.mvp_list); ++.@a) {
+				if (killedrid == .mvp_list[.@a]) {
+					#pontos_mvp += 1;
+					if (!mvp_kdr_verify) {
+						query_sql("INSERT INTO `"+.table$+"` (`char_id`, `name`, `class`, `hair`, `hair_color`, `clothes_color`, `body`, `kill`, `death`, `kdr`) VALUES ('"+getcharid(0)+"', '"+strcharinfo(0)+"', '"+readparam(Class)+"', '"+getlook(LOOK_HAIR)+"', '"+getlook(LOOK_HAIR_COLOR)+"', '"+getlook(LOOK_CLOTHES_COLOR)+"', '"+getlook(LOOK_BODY2)+"', '0', '0', '0')");
+						mvp_kdr_verify = 1;
+					}
+					//Puxa da database
+					query_SQL("SELECT `kill`,`death` FROM `"+.table$+"` WHERE `char_id`='"+getcharid(0)+"'", .@kill, .@death);
+					.@kill = .@kill + 1;
+					if (.@death >= .@kill)
+						.@kdr = 0;
+					else
+						.@kdr = .@kill - .@death;
+					
+					dispbottom "[Ranking] Sua pontuação: "+ .@kill +" - "+ .@death +" = "+ .@kdr +".";
+					dispbottom "[Pontos MvP] Seus pontos: " + #pontos_mvp;
+					//Atualiza a database
+					query_sql("UPDATE `"+.table$+"` SET `hair`='"+getlook(LOOK_HAIR)+"', `hair_color`='"+getlook(LOOK_HAIR_COLOR)+"', `clothes_color`='"+getlook(LOOK_CLOTHES_COLOR)+"', `body`='"+getlook(LOOK_BODY2)+"', `kill`='"+.@kill+"', `kdr`='"+.@kdr+"' WHERE `char_id`='"+getcharid(0)+"'");
+				}
+			}
+		}
+	}
+end;
+	
+OnPCDieEvent:
+	for (.@i=1; .@i<=4; .@i++){
+		if (strcharinfo(3) == "bossnia_0"+.@i+"") {
+			//Insere na DB se ainda não tiver dados.
+			if (!mvp_kdr_verify) {
+				query_sql("INSERT INTO `"+.table$+"` (`char_id`, `name`, `class`, `hair`, `hair_color`, `clothes_color`, `body`, `kill`, `death`, `kdr`) VALUES ('"+getcharid(0)+"', '"+strcharinfo(0)+"', '"+readparam(Class)+"', '"+getlook(LOOK_HAIR)+"', '"+getlook(LOOK_HAIR_COLOR)+"', '"+getlook(LOOK_CLOTHES_COLOR)+"', '"+getlook(LOOK_BODY2)+"', '0', '0', '0')");
+				mvp_kdr_verify = 1;
+			}
+			
+			//Puxa da database
+			query_SQL("SELECT `kill`,`death` FROM `"+.table$+"` WHERE `char_id`='"+getcharid(0)+"'", .@kill, .@death);
+			.@death =  .@death + 1;
+			if (.@death >= .@kill)
+				.@kdr = 0;
+			else
+				.@kdr = .@kill - .@death;
+			
+			dispbottom "[Ranking] Sua pontuação: "+ .@kill +" - "+ .@death +" = "+ .@kdr +".";
+			//Atualiza a database
+			query_sql("UPDATE `"+.table$+"` SET `hair`='"+getlook(LOOK_HAIR)+"', `hair_color`='"+getlook(LOOK_HAIR_COLOR)+"', `clothes_color`='"+getlook(LOOK_CLOTHES_COLOR)+"', `body`='"+getlook(LOOK_BODY2)+"', `death`='"+.@death+"', `kdr`='"+.@kdr+"' WHERE `char_id`='"+getcharid(0)+"'");
+				
+			for (.@b=5; .@b>0;	.@b--) {
+				if (strcharinfo(3) != "bossnia_0"+.@i+"")
+					break;
+				message strcharinfo(0),"Você irá renascer em "+.@b+" segundos.";
+				sleep2 1000;
+			}
+			if (strcharinfo(3) == "bossnia_0"+.@i+"") { //Terceira verificação de segurança
+				warp "bossnia_0"+.@i+"",0,0;
+				callfunc "F_Healer";
+				percentheal 100,100;
+			}
+		}
+	}
+end;
+
+function	MvPCount	{
+	for (.@i = 1; .@i <= 4; ++.@i) {
+		.@count += getmapusers("bossnia_0"+.@i);
+	}
+	return .@count;
+}
+
+OnInit:
+	.nome$ = "^0000FFBossnia^000000";
+	.table$ = "ranking_mvp";
+	setarray .mvp_list[0],1059,2476,1511,1785,2483,1874,1871,2068,2241,1719,1046,1389,1112,1115,1658,1157,1150,1159,1312,1885,2255,1252,1832,1734,2202,1779,1630,1688,1646,1147,1708,1087,1038,1768,2219,2087,1623,1492,1272,1373,1418,2022,1583,1751,1658;
+	end;
+}
+
+// Monster Spawns
+//============================================================
+
+//----------------------------------------------------------------------------
+// bossnia_01 - Bossnia
+//----------------------------------------------------------------------------
+bossnia_01,0,0	monster	Abelha-Rainha	1059,3,0
+bossnia_01,0,0	monster	Amdarais	2476,3,0
+bossnia_01,0,0	monster	Amon Ra	1511,3,0
+bossnia_01,0,0	monster	Atroce	1785,3,0
+bossnia_01,0,0	monster	Bafomé Amaldiçoado	2483,2,0
+bossnia_01,0,0	monster	Belzebu	1874,2,0
+bossnia_01,0,0	monster	Bispo Decadente	1871,2,0
+bossnia_01,0,0	monster	Boitatá	2068,2,0
+bossnia_01,0,0	monster	Cigana Trentini	2241,2,0
+bossnia_01,0,0	monster	Detardeurus	1719,3,0
+bossnia_01,0,0	monster	Doppelganger	1046,3,0
+bossnia_01,0,0	monster	Drácula	1389,3,0
+bossnia_01,0,0	monster	Drake	1112,3,0
+bossnia_01,0,0	monster	Eddga	1115,3,0
+bossnia_01,0,0	monster	Egnigem Cenia	1658,3,0
+bossnia_01,0,0	monster	Faraó	1157,3,0
+bossnia_01,0,0	monster	Flor do Luar	1150,3,0
+bossnia_01,0,0	monster	Freeoni	1159,3,0
+bossnia_01,0,0	monster	General Tartaruga	1312,3,0
+bossnia_01,0,0	monster	Gorynych	1885,3,0
+bossnia_01,0,0	monster	Guardião Morto Kades	2255,2,0
+bossnia_01,0,0	monster	Hatii	1252,3,0
+bossnia_01,0,0	monster	Ifrit	1832,2,0
+bossnia_01,0,0	monster	Kiel-D-01	1734,2,0
+bossnia_01,0,0	monster	Kraken	2202,3,0
+bossnia_01,0,0	monster	Ktullanux	1779,2,0
+bossnia_01,0,0	monster	Lady Branca	1630,3,0
+bossnia_01,0,0	monster	Lady Tanee	1688,3,0
+bossnia_01,0,0	monster	Lorde Seyren	1646,2,0
+bossnia_01,0,0	monster	Maya	1147,2,0
+bossnia_01,0,0	monster	Memória de Thanatos	1708,2,0
+bossnia_01,0,0	monster	Orc Herói	1087,3,0
+bossnia_01,0,0	monster	Osíris	1038,3,0
+bossnia_01,0,0	monster	Pesar Noturno	1768,2,0
+bossnia_01,0,0	monster	Polvo Gigante	2219,3,0
+bossnia_01,0,0	monster	Rainha Scaraba	2087,2,0
+bossnia_01,0,0	monster	RSX-0806	1623,3,0
+bossnia_01,0,0	monster	Samurai Encarnado	1492,2,0
+bossnia_01,0,0	monster	Senhor das Trevas	1272,3,0
+bossnia_01,0,0	monster	Senhor dos Mortos	1373,3,0
+bossnia_01,0,0	monster	Serpente Suprema	1418,3,0
+bossnia_01,0,0	monster	Sombra de Nidhogg	2022,2,0
+bossnia_01,0,0	monster	Tao Gunka	1583,2,0
+bossnia_01,0,0	monster	Valquíria Randgris	1751,2,0
+bossnia_01,0,0	monster	Vesper	1685,3,0
+//----------------------------------------------------------------------------
+// bossnia_02 - Bossnia
+//----------------------------------------------------------------------------
+bossnia_02,0,0	monster	Abelha-Rainha	1059,3,0
+bossnia_02,0,0	monster	Amdarais	2476,3,0
+bossnia_02,0,0	monster	Amon Ra	1511,3,0
+bossnia_02,0,0	monster	Atroce	1785,3,0
+bossnia_02,0,0	monster	Bafomé Amaldiçoado	2483,2,0
+bossnia_02,0,0	monster	Belzebu	1874,2,0
+bossnia_02,0,0	monster	Bispo Decadente	1871,2,0
+bossnia_02,0,0	monster	Boitatá	2068,2,0
+bossnia_02,0,0	monster	Cigana Trentini	2241,2,0
+bossnia_02,0,0	monster	Detardeurus	1719,3,0
+bossnia_02,0,0	monster	Doppelganger	1046,3,0
+bossnia_02,0,0	monster	Drácula	1389,3,0
+bossnia_02,0,0	monster	Drake	1112,3,0
+bossnia_02,0,0	monster	Eddga	1115,3,0
+bossnia_02,0,0	monster	Egnigem Cenia	1658,3,0
+bossnia_02,0,0	monster	Faraó	1157,3,0
+bossnia_02,0,0	monster	Flor do Luar	1150,3,0
+bossnia_02,0,0	monster	Freeoni	1159,3,0
+bossnia_02,0,0	monster	General Tartaruga	1312,3,0
+bossnia_02,0,0	monster	Gorynych	1885,3,0
+bossnia_02,0,0	monster	Guardião Morto Kades	2255,2,0
+bossnia_02,0,0	monster	Hatii	1252,3,0
+bossnia_02,0,0	monster	Ifrit	1832,2,0
+bossnia_02,0,0	monster	Kiel-D-01	1734,2,0
+bossnia_02,0,0	monster	Kraken	2202,3,0
+bossnia_02,0,0	monster	Ktullanux	1779,2,0
+bossnia_02,0,0	monster	Lady Branca	1630,3,0
+bossnia_02,0,0	monster	Lady Tanee	1688,3,0
+bossnia_02,0,0	monster	Lorde Seyren	1646,2,0
+bossnia_02,0,0	monster	Maya	1147,2,0
+bossnia_02,0,0	monster	Memória de Thanatos	1708,2,0
+bossnia_02,0,0	monster	Orc Herói	1087,3,0
+bossnia_02,0,0	monster	Osíris	1038,3,0
+bossnia_02,0,0	monster	Pesar Noturno	1768,2,0
+bossnia_02,0,0	monster	Polvo Gigante	2219,3,0
+bossnia_02,0,0	monster	Rainha Scaraba	2087,2,0
+bossnia_02,0,0	monster	RSX-0806	1623,3,0
+bossnia_02,0,0	monster	Samurai Encarnado	1492,2,0
+bossnia_02,0,0	monster	Senhor das Trevas	1272,3,0
+bossnia_02,0,0	monster	Senhor dos Mortos	1373,3,0
+bossnia_02,0,0	monster	Serpente Suprema	1418,3,0
+bossnia_02,0,0	monster	Sombra de Nidhogg	2022,2,0
+bossnia_02,0,0	monster	Tao Gunka	1583,2,0
+bossnia_02,0,0	monster	Valquíria Randgris	1751,2,0
+bossnia_02,0,0	monster	Vesper	1685,3,0
+//----------------------------------------------------------------------------
+// bossnia_03 - Bossnia
+//----------------------------------------------------------------------------
+bossnia_03,0,0	monster	Abelha-Rainha	1059,3,0
+bossnia_03,0,0	monster	Amdarais	2476,3,0
+bossnia_03,0,0	monster	Amon Ra	1511,3,0
+bossnia_03,0,0	monster	Atroce	1785,3,0
+bossnia_03,0,0	monster	Bafomé Amaldiçoado	2483,2,0
+bossnia_03,0,0	monster	Belzebu	1874,2,0
+bossnia_03,0,0	monster	Bispo Decadente	1871,2,0
+bossnia_03,0,0	monster	Boitatá	2068,2,0
+bossnia_03,0,0	monster	Cigana Trentini	2241,2,0
+bossnia_03,0,0	monster	Detardeurus	1719,3,0
+bossnia_03,0,0	monster	Doppelganger	1046,3,0
+bossnia_03,0,0	monster	Drácula	1389,3,0
+bossnia_03,0,0	monster	Drake	1112,3,0
+bossnia_03,0,0	monster	Eddga	1115,3,0
+bossnia_03,0,0	monster	Egnigem Cenia	1658,3,0
+bossnia_03,0,0	monster	Faraó	1157,3,0
+bossnia_03,0,0	monster	Flor do Luar	1150,3,0
+bossnia_03,0,0	monster	Freeoni	1159,3,0
+bossnia_03,0,0	monster	General Tartaruga	1312,3,0
+bossnia_03,0,0	monster	Gorynych	1885,3,0
+bossnia_03,0,0	monster	Guardião Morto Kades	2255,2,0
+bossnia_03,0,0	monster	Hatii	1252,3,0
+bossnia_03,0,0	monster	Ifrit	1832,2,0
+bossnia_03,0,0	monster	Kiel-D-01	1734,2,0
+bossnia_03,0,0	monster	Kraken	2202,3,0
+bossnia_03,0,0	monster	Ktullanux	1779,2,0
+bossnia_03,0,0	monster	Lady Branca	1630,3,0
+bossnia_03,0,0	monster	Lady Tanee	1688,3,0
+bossnia_03,0,0	monster	Lorde Seyren	1646,2,0
+bossnia_03,0,0	monster	Maya	1147,2,0
+bossnia_03,0,0	monster	Memória de Thanatos	1708,2,0
+bossnia_03,0,0	monster	Orc Herói	1087,3,0
+bossnia_03,0,0	monster	Osíris	1038,3,0
+bossnia_03,0,0	monster	Pesar Noturno	1768,2,0
+bossnia_03,0,0	monster	Polvo Gigante	2219,3,0
+bossnia_03,0,0	monster	Rainha Scaraba	2087,2,0
+bossnia_03,0,0	monster	RSX-0806	1623,3,0
+bossnia_03,0,0	monster	Samurai Encarnado	1492,2,0
+bossnia_03,0,0	monster	Senhor das Trevas	1272,3,0
+bossnia_03,0,0	monster	Senhor dos Mortos	1373,3,0
+bossnia_03,0,0	monster	Serpente Suprema	1418,3,0
+bossnia_03,0,0	monster	Sombra de Nidhogg	2022,2,0
+bossnia_03,0,0	monster	Tao Gunka	1583,2,0
+bossnia_03,0,0	monster	Valquíria Randgris	1751,2,0
+bossnia_03,0,0	monster	Vesper	1685,3,0
+//----------------------------------------------------------------------------
+// bossnia_04 - Bossnia
+//----------------------------------------------------------------------------
+bossnia_04,0,0	monster	Abelha-Rainha	1059,3,0
+bossnia_04,0,0	monster	Amdarais	2476,2,0
+bossnia_04,0,0	monster	Amon Ra	1511,2,0
+bossnia_04,0,0	monster	Atroce	1785,3,0
+bossnia_04,0,0	monster	Bafomé Amaldiçoado	2483,2,0
+bossnia_04,0,0	monster	Belzebu	1874,2,0
+bossnia_04,0,0	monster	Bispo Decadente	1871,2,0
+bossnia_04,0,0	monster	Boitatá	2068,2,0
+bossnia_04,0,0	monster	Cigana Trentini	2241,2,0
+bossnia_04,0,0	monster	Detardeurus	1719,3,0
+bossnia_04,0,0	monster	Doppelganger	1046,3,0
+bossnia_04,0,0	monster	Drácula	1389,3,0
+bossnia_04,0,0	monster	Drake	1112,3,0
+bossnia_04,0,0	monster	Eddga	1115,3,0
+bossnia_04,0,0	monster	Egnigem Cenia	1658,3,0
+bossnia_04,0,0	monster	Faraó	1157,3,0
+bossnia_04,0,0	monster	Flor do Luar	1150,3,0
+bossnia_04,0,0	monster	Freeoni	1159,3,0
+bossnia_04,0,0	monster	General Tartaruga	1312,3,0
+bossnia_04,0,0	monster	Gorynych	1885,3,0
+bossnia_04,0,0	monster	Guardião Morto Kades	2255,2,0
+bossnia_04,0,0	monster	Hatii	1252,3,0
+bossnia_04,0,0	monster	Ifrit	1832,2,0
+bossnia_04,0,0	monster	Kiel-D-01	1734,2,0
+bossnia_04,0,0	monster	Kraken	2202,3,0
+bossnia_04,0,0	monster	Ktullanux	1779,2,0
+bossnia_04,0,0	monster	Lady Branca	1630,3,0
+bossnia_04,0,0	monster	Lady Tanee	1688,3,0
+bossnia_04,0,0	monster	Lorde Seyren	1646,2,0
+bossnia_04,0,0	monster	Maya	1147,2,0
+bossnia_04,0,0	monster	Memória de Thanatos	1708,2,0
+bossnia_04,0,0	monster	Orc Herói	1087,3,0
+bossnia_04,0,0	monster	Osíris	1038,3,0
+bossnia_04,0,0	monster	Pesar Noturno	1768,2,0
+bossnia_04,0,0	monster	Polvo Gigante	2219,3,0
+bossnia_04,0,0	monster	Rainha Scaraba	2087,2,0
+bossnia_04,0,0	monster	RSX-0806	1623,3,0
+bossnia_04,0,0	monster	Samurai Encarnado	1492,2,0
+bossnia_04,0,0	monster	Senhor das Trevas	1272,3,0
+bossnia_04,0,0	monster	Senhor dos Mortos	1373,3,0
+bossnia_04,0,0	monster	Serpente Suprema	1418,3,0
+bossnia_04,0,0	monster	Sombra de Nidhogg	2022,2,0
+bossnia_04,0,0	monster	Tao Gunka	1583,2,0
+bossnia_04,0,0	monster	Valquíria Randgris	1751,2,0
+bossnia_04,0,0	monster	Vesper	1685,3,0

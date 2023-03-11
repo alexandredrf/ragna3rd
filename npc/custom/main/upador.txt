@@ -1,0 +1,83 @@
+//===== FOX Ragnarök ======================================
+//= [ADM] odin | [ADM] well | [ADM] ramon
+//=========================================================
+prontera,150,193,4	script	Upador	468,{
+	.@name$ = "^0000FFUpador^000000";
+	if (Class != 0) {
+		mes "[ " + .@name$ + " ]";
+		mes "Você já mudou de classe.";
+		close3;
+	}
+	mes "[ " + .@name$ + " ]";
+	mes "Olá. Seja bem vindo ao ^FF0000GalaxyRO^000000.";
+	mes "Gostaria de trocar de classe? Tudo bem.";
+	mes "Me diga qual classe deseja.";
+	next;
+
+	.@choice = select("Transcedental","Mini-Classe","Expandida","Regular");
+	switch (.@choice) {
+		case 1:
+			.@upper = 1;
+			.@class = select("Classe 3","Classe 2","Classe 1");
+			break;
+		case 2:
+			.@upper = 2;
+			.@class = select("Classe 3","Classe 2","Classe 1");
+			break;
+		case 3:
+			.@upper = 0;
+			.@class = select("Classe 2","Classe 1");
+			.@type = 1; // Expanded class confirmation
+			break;
+		case 4:
+			.@upper = 0;
+			.@class = select("Classe 3","Classe 2","Classe 1");
+			break;
+	}
+
+	if (!.@type) {
+		switch (.@class) {
+			case 1: // Class 3
+				setarray .@jobs[0],JOB_RUNE_KNIGHT,JOB_ROYAL_GUARD,JOB_WARLOCK,JOB_SORCERER,JOB_RANGER,(Sex)?JOB_MINSTREL:JOB_WANDERER,JOB_MECHANIC,JOB_GENETIC,JOB_GUILLOTINE_CROSS,JOB_SHADOW_CHASER,JOB_ARCH_BISHOP,JOB_SURA;
+				break;
+			case 2: // Class 2
+				setarray .@jobs[0],JOB_KNIGHT,JOB_CRUSADER,JOB_WIZARD,JOB_SAGE,JOB_HUNTER,(Sex)?JOB_BARD:JOB_DANCER,JOB_BLACKSMITH,JOB_ALCHEMIST,JOB_ASSASSIN,JOB_ROGUE,JOB_PRIEST,JOB_MONK;
+				break;
+			case 3: // Class 1
+				setarray .@jobs[0],JOB_SWORDMAN,JOB_MAGE,JOB_ARCHER,JOB_MERCHANT,JOB_THIEF,JOB_ACOLYTE;
+				break;
+		}
+	}
+	else {
+		switch (.@class) {
+			case 1: // Class 2
+				setarray .@jobs[0],JOB_STAR_GLADIATOR,JOB_SOUL_LINKER,(Sex)?JOB_KAGEROU:JOB_OBORO,JOB_SUPER_NOVICE_E;
+				break;
+			case 2: // Class 1
+				setarray .@jobs[0],JOB_TAEKWON,JOB_NINJA,JOB_GUNSLINGER,JOB_SUPER_NOVICE;
+				break;
+		}
+	}
+
+	for (.@i = 0; .@i < getarraysize(.@jobs); ++.@i) {
+		.@menu$ += jobname(.@jobs[.@i]) + ":";
+	}
+	.@select = select(.@menu$)-1;
+
+	mes "[ " + .@name$ + " ]";
+	mes "Você tem certeza que deseja se tornar ^008C00" + jobname(.@jobs[.@select]) + "^000000?";
+	next;
+	if (select("Sim","Não") == 2) {
+		mes "[ " + .@name$ + " ]";
+		mes "Bom... quando se decidir volte e converse comigo.";
+		close3;
+	}
+	jobchange .@jobs[.@select],.@upper;
+	set BaseLevel, 999; set JobLevel, 999;
+	callfunc "F_GetPlatinumSkills";
+	atcommand "@allskills";
+	percentheal 100,100;
+	mes "[ " + .@name$ + " ]";
+	mes "Eu te tornei ^008C00" + jobname(.@jobs[.@select]) + "^000000!";
+	close3;
+}

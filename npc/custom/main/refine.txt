@@ -1,0 +1,291 @@
+function	script	Carniumrefine	{
+	.@name$ = getarg(0);
+	setarray .@equip_pos[1],EQI_HEAD_TOP,EQI_HEAD_MID,EQI_HEAD_LOW,EQI_ARMOR,EQI_HAND_R,EQI_HAND_L,EQI_GARMENT,EQI_SHOES,EQI_ACC_R,EQI_ACC_L;
+	setarray .@equip_name$[1],"Cima","Centro","Baixo","Vestimenta","Arma","Escudo","Capa","Sapatos","Acessório 1","Acessório 2";
+	.@weapon_material = 6226; // Bradium Perfeito
+	.@armor_material = 6225; // Carnium Perfeito
+
+	disable_items;
+	mes "[ "+ .@name$ +" ]";
+	mes "Eu sou o melhor ferreiro, Brook!";
+	mes "Eu normalmente não refino itens comuns.";
+	mes "Eu trabalho apenas com o aprimoramento acima do +10.";
+	next;
+	mes "[ "+ .@name$ +" ]";
+	mes "Em caso de falha seu nível de aprimoramento será reduzido em -1.";
+	next;
+	mes "[ "+ .@name$ +" ]";
+	mes "Enfim, se você possuir itens com essas descrições equipados em seu personagem eu posso refiná-los mais ainda.";
+	mes "Qual item você quer que eu refine?";
+	next;
+
+	setarray .@equip_pos[1],EQI_HEAD_TOP,EQI_HEAD_MID,EQI_HEAD_LOW,EQI_ARMOR,EQI_HAND_R,EQI_HAND_L,EQI_GARMENT,EQI_SHOES,EQI_ACC_R,EQI_ACC_L;
+	for (.@i = 1; .@i <= getarraysize(.@equip_pos); ++.@i) {
+		if (getequipisequiped(.@equip_pos[.@i]))
+			.@menu$ += getequipname(.@equip_pos[.@i]);
+		else
+			.@menu$ += "^777777" + .@equip_name$[.@i] + " - " + "[Vazio]" + "^000000";
+		.@menu$ += ":";
+	}
+	.@part = .@equip_pos[select(.@menu$)];
+	.@equip_id = getequipid(.@part);
+	if (!getequipisequiped(.@part)) { //custom check
+		mes "[ "+ .@name$ +" ]";
+		mes "Não tem nada aqui!";
+		emotion ET_FRET;
+		close;
+	}
+	if (!getequipisenableref(.@part)) {
+		mes "[ "+ .@name$ +" ]";
+		mes "Eu não acho que posso";
+		mes "refinar esse item...";
+		close;
+	}
+	if (getequiprefinerycnt(.@part) >= 20) { //custom check
+		mes "[ "+ .@name$ +" ]";
+		mes "Não posso mais refinar esse item.";
+		mes "Eu só trabalho com itens com o aprimoramento até +20";
+		close;
+	}
+	if (getiteminfo(.@equip_id,2) == 5) {
+		.@material = .@weapon_material;
+		.@type$ = "arma";
+	}
+	else if (getiteminfo(.@equip_id,2) == 4) {
+		.@material = .@armor_material;
+		.@type$ = "armadura";
+	}
+	
+	
+	mes "[ "+ .@name$ +" ]";
+	.@equip_refine = getequiprefinerycnt(.@part);
+	.@bool = 1;
+	if (getequiprefinerycnt(.@part) < 10 || getequiprefinerycnt(.@part) > 19) { //custom check
+	mes "Este equipamento foi refinado para "+.@equip_refine+".";
+	mes "Eu só trabalho com itens com o aprimoramento  acima do +10.";
+	close3;
+	}
+	mes "Essa " + .@type$ + " foi refinada para +"+.@equip_refine+", é necessário " + .@bool + " ^003366" + getitemname(.@material) + "^000000 para refinar.";
+	mes "Você confirma o refinamento?";
+	next;
+	if(select("Sim:Não") == 2) {
+		mes "[ "+ .@name$ +" ]";
+		mes "Hum... se você se importa... deixa pra lá...";
+		close;
+	}
+	while (1) {
+		.@refinerycnt = getequiprefinerycnt(.@part);
+		if (getequiprefinerycnt(.@part) < 10 || getequiprefinerycnt(.@part) > 20) { //custom check
+			mes "[ "+ .@name$ +" ]";
+			mes "Eu só trabalho com itens com o aprimoramento  acima do +10.";
+			close3;
+		}
+		if (countitem(.@material) < 1 ) {
+			mes "[ "+ .@name$ +" ]";
+			mes "Hum... Você não parece ter ^003366" + getitemname(.@material) + "^000000 suficiente.";
+			close;
+		}
+if (getequiprefinerycnt(.@part) >= 9 || getequiprefinerycnt(.@part) <= 13)
+.@chance = 7;
+else if (getequiprefinerycnt(.@part) >= 14 || getequiprefinerycnt(.@part) <= 18) {
+.@chance = 6; 
+} else if (getequiprefinerycnt(.@part) > 18) {
+.@chance = 4; 
+} delitem .@material,1;	
+		// anti-hack
+		if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) ||
+		    callfunc("F_IsEquipRefineHack", .@part, .@refinerycnt)) {
+			mes "[ "+ .@name$ +" ]";
+			emotion ET_FRET;
+			mes "Espere um segundo...";
+			mes "Você acha que eu sou estúpido?!";
+			mes "Você trocou o item enquanto eu não estava olhando! Saia daqui!";
+			close;
+		}
+		
+		if (rand(100) <= .@chance) {
+			mes "[ "+ .@name$ +" ]";
+			mes "Tac! Tac! Tac!";
+			successrefitem .@part;
+			next;
+			mes "[ "+ .@name$ +" ]";
+			mes "Bom! Successo!!!";
+			mes "Eu sou o melhor ferreiro.";
+			close;
+		} 
+		else {
+			mes "[ "+ .@name$ +" ]";
+			mes "Tac! Tac! Tac!";
+			emotion (!rand(5))?ET_MONEY:ET_HUK;
+			downrefitem .@part, 1;
+			next;
+			mes "[ "+ .@name$ +" ]";
+			mes "Oh meu Deus!!!";
+			next;
+			mes "[ "+ .@name$ +" ]";
+			mes "Oh! Embora abençoado pelo ^003366" + getitemname(.@material) + "^000000 o refino retrocedeu...";
+			next;
+			mes "[ "+ .@name$ +" ]";
+			mes "Eu farei um trabalho melhor da próxima vez! Não se preocupe!";
+			close;
+		}
+	}
+
+	return;
+}
+function	script	omnirefine	{
+	.@name$ = getarg(0);
+	setarray .@equip_pos[1],EQI_HEAD_TOP,EQI_HEAD_MID,EQI_HEAD_LOW,EQI_ARMOR,EQI_HAND_R,EQI_HAND_L,EQI_GARMENT,EQI_SHOES,EQI_ACC_R,EQI_ACC_L;
+	setarray .@equip_name$[1],"Cima","Centro","Baixo","Vestimenta","Arma","Escudo","Capa","Sapatos","Acessório 1","Acessório 2";
+	.@weapon_material = 6438; // Omni-Oridecon
+	.@armor_material = 6439; // Mega-Elunium
+
+	disable_items;
+	mes "[ "+ .@name$ +" ]";
+	mes "Atualmente é muito difícil se destacar no mercado de trabalho.";
+	mes "É preciso se diferenciar para sobreviver.";
+	mes "Quando refinado, o equipamento não será destruído ~";
+	next;
+	mes "[ "+ .@name$ +" ]";
+	mes "Este item funciona apenas em equipamentos com refino entre +6 e +12.";
+	next;
+	mes "[ "+ .@name$ +" ]";
+	mes "Então?? Você quer refinar seu item?";
+	next;
+
+	setarray .@equip_pos[1],EQI_HEAD_TOP,EQI_HEAD_MID,EQI_HEAD_LOW,EQI_ARMOR,EQI_HAND_R,EQI_HAND_L,EQI_GARMENT,EQI_SHOES,EQI_ACC_R,EQI_ACC_L;
+	for (.@i = 1; .@i <= getarraysize(.@equip_pos); ++.@i) {
+		if (getequipisequiped(.@equip_pos[.@i]))
+			.@menu$ += getequipname(.@equip_pos[.@i]);
+		else
+			.@menu$ += "^777777" + .@equip_name$[.@i] + " - " + "[Vazio]" + "^000000";
+		.@menu$ += ":";
+	}
+	.@part = .@equip_pos[select(.@menu$)];
+	.@equip_id = getequipid(.@part);
+	if (!getequipisequiped(.@part)) { //custom check
+		mes "[ "+ .@name$ +" ]";
+		mes "Não tem nada aqui!";
+		emotion ET_FRET;
+		close;
+	}
+	if (!getequipisenableref(.@part)) {
+		mes "[ "+ .@name$ +" ]";
+		mes "Eu não acho que posso";
+		mes "refinar esse item...";
+		close;
+	}
+	if (getequiprefinerycnt(.@part) >= 13) { //custom check
+		mes "[ "+ .@name$ +" ]";
+		mes "Não posso mais refinar esse item.";
+		mes "Eu só trabalho com itens com o refino +6 ao +12!";
+		close;
+	}
+	if (getiteminfo(.@equip_id,2) == 5) {
+		.@material = .@weapon_material;
+		.@type$ = "arma";
+	}
+	else if (getiteminfo(.@equip_id,2) == 4) {
+		.@material = .@armor_material;
+		.@type$ = "armadura";
+	}
+	
+	
+	mes "[ "+ .@name$ +" ]";
+	.@equip_refine = getequiprefinerycnt(.@part);
+	.@bool = 1;
+	if (getequiprefinerycnt(.@part) < 6 || getequiprefinerycnt(.@part) > 12) { //custom check
+	mes "Este equipamento foi refinado para "+.@equip_refine+".";
+	mes "Eu só trabalho com itens com o refino +6 ao +12!";
+	close3;
+	}
+	mes "Essa " + .@type$ + " foi refinada para +"+.@equip_refine+", é necessário " + .@bool + " ^003366" + getitemname(.@material) + "^000000 para refinar.";
+	mes "Você confirma o refinamento?";
+	next;
+	if(select("Sim:Não") == 2) {
+		mes "[ "+ .@name$ +" ]";
+		mes "Hum... se você se importa... deixa pra lá...";
+		close;
+	}
+	while (1) {
+		.@refinerycnt = getequiprefinerycnt(.@part);
+		if (getequiprefinerycnt(.@part) < 6 || getequiprefinerycnt(.@part) > 12) { //custom check
+			mes "[ "+ .@name$ +" ]";
+			mes "Este equipamento foi refinado para o +13.";
+			mes "Eu só trabalho com itens com o refino +6 ao +12!";
+			close3;
+		}
+		if (countitem(.@material) < 1 ) {
+			mes "[ "+ .@name$ +" ]";
+			mes "Hum... Você não parece ter ^003366" + getitemname(.@material) + "^000000 suficiente.";
+			close;
+		}
+
+if (getequiprefinerycnt(.@part) <= 7)
+.@chance = 30;
+else if (getequiprefinerycnt(.@part) == 8) {
+.@chance = 25;
+} else if (getequiprefinerycnt(.@part) == 9) {
+.@chance = 15; 
+} else if (getequiprefinerycnt(.@part) >= 10) {
+.@chance = 7; 
+} delitem .@material,1;	
+		// anti-hack
+		if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) ||
+		    callfunc("F_IsEquipRefineHack", .@part, .@refinerycnt)) {
+			mes "[ "+ .@name$ +" ]";
+			emotion ET_FRET;
+			mes "Espere um segundo...";
+			mes "Você acha que eu sou estúpido?!";
+			mes "Você trocou o item enquanto eu não estava olhando! Saia daqui!";
+			close;
+		}
+		
+		if (rand(100) <= .@chance) {
+			mes "[ "+ .@name$ +" ]";
+			mes "Tac! Tac! Tac!";
+			successrefitem .@part;
+			next;
+			mes "[ "+ .@name$ +" ]";
+			mes "Bom! Successo!!!";
+			mes "Eu sou o melhor ferreiro.";
+			next;
+		} 
+		else {
+			mes "[ "+ .@name$ +" ]";
+			mes "Tac! Tac! Tac!";
+			emotion (!rand(5))?ET_MONEY:ET_HUK;
+			specialeffect2 EF_SUI_EXPLOSION;
+			//downrefitem .@part,0; // Only for the fail refinement animation
+			next;
+			mes "[ "+ .@name$ +" ]";
+			mes "Oh meu Deus!!!";
+			next;
+			mes "[ "+ .@name$ +" ]";
+			mes "Oh! Embora abençoado pelo ^003366" + getitemname(.@material) + "^000000 o refino continuará o mesmo.";
+			next;
+			mes "[ "+ .@name$ +" ]";
+			mes "Meu humor sempre piora quando o refinamento falha!";
+			next;
+		}
+		mes "[ "+ .@name$ +" ]";
+		mes "Você quer tentar de novo?";
+		next;
+		if(select("Sim:Não") == 2) {
+			mes "[ "+ .@name$ +" ]";
+			mes "Hum... se você se importa... deixa pra lá...";
+			close;
+		}
+	}
+
+	return;
+}
+
+prt_in,58,54,3	script	Ferreiro Magnifico	826,{
+	callfunc "omnirefine","^0000FFFerreiro Magnifico^000000";
+	end;
+}
+prt_in,60,54,3	script	Brokk	826,{
+	callfunc "Carniumrefine","^0000FFBrokk^000000";
+	end;
+}

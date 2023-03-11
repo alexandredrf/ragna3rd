@@ -1,0 +1,32 @@
+//===== ragna!Crush =======================================
+//= [ADM] odin
+//=========================================================
+prontera,165,196,4	script	Atendente Vip	91,{
+
+		if(getgroupid() < 0) goto SemPasse;
+		cutin "katsua02",2;
+		mes "[Atendente Vip]";
+		mes "Olá ^FF0000"+ strcharinfo(0) + "^000000!";
+		mes "Seu passe esta confirmado";
+		mes "Diga-me o que deseja.";
+		next;
+		menu "^00B2EE[  •  ]^000000 Retirar Cartas Equipadas",L_RET,"^00B2EE[  •  ]^000000 Resetar Pontos",L_RES,"^CD0000[  •  ]^000000 Sair",L_SAI;
+
+L_RET:
+	cutin "",255;
+	callfunc "VIP_RET";
+
+L_RES:
+	cutin "",255;
+	callfunc "VIP_RES";
+
+L_SAI:
+	cutin "",255;
+	close;
+
+SemPasse:
+mes "[Atendente Vip]";
+mes "Me desculpe, mas atendo somente a usuários VIP.";
+mes "Se você deseja ser usuário VIP, visite www.pbgo.net e descubra como se tornar um.";
+close;
+}

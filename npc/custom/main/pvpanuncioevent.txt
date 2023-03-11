@@ -1,0 +1,37 @@
+prontera.gat,0,0,0	script	PvpanuncioEvent::PvpanuncioEvent	-1,{
+
+OnHour22:
+
+set $pvp_livre,0;
+
+announce "Arena da Morte: As salas de Rank PVP e Rank GVG estão sendo fechadas agora!",0;
+
+announce "Arena da Morte: Elas vão abrir somente amanhã as 10:00 da manhã. A todos uma boa noite!",0;
+
+mapwarp "guild_vs3","prontera",155,155;
+
+mapwarp "guild_vs1","prontera",155,155;
+
+end;
+
+OnClock1001:
+
+mapwarp "guild_vs3","prontera",155,155;
+
+mapwarp "guild_vs1","prontera",155,155;
+
+end;
+
+// INICIO PVP
+
+OnHour10:
+
+set $pvp_livre,1;
+
+announce "Arena da Morte: As salas de Rank PVP e Rank GVG estão sendo abertas agora!",0;
+
+announce "Arena da Morte: Aproveite para conquista o seu lugar no TOPO!",0;
+
+end;
+
+}

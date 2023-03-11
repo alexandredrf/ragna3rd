@@ -1,0 +1,45 @@
+//===== FOX Ragnarök ======================================
+//= [ADM] odin | [ADM] well | [ADM] ramon
+//=========================================================
+-	script	diepvp	-1,{
+
+OnPCDieEvent:
+	if(strcharinfo(3) == "guild_vs3" || strcharinfo(3) == "pvp_n_1-5" || strcharinfo(3) == "guild_vs1" || strcharinfo(3) == "pvp_y_1-2" || strcharinfo(3) == "guild_vs2" || strcharinfo(3) == "guild_vs1-4") {
+        dispbottom "Você será revivido em 5 segundos.";
+        sleep2 1000;
+        dispbottom "Você será revivido em 4 segundos.";
+        sleep2 1000;
+        dispbottom "Você será revivido em 3 segundos.";
+        sleep2 1000;
+        dispbottom "Você será revivido em 2 segundos.";
+        sleep2 1000;
+        dispbottom "Você será revivido em 1 segundo.";
+        sleep2 1000;
+	if(strcharinfo(3) == "guild_vs3" || strcharinfo(3) == "pvp_n_1-5" || strcharinfo(3) == "guild_vs1" || strcharinfo(3) == "pvp_y_1-2" || strcharinfo(3) == "guild_vs2" || strcharinfo(3) == "guild_vs1-4") {
+		atcommand "@alive";
+		warp strcharinfo(3),0,0;
+		if(getgmlevel() >= 0){
+		sc_start 30, 360000,10;
+		sc_start 29, 360000,5;
+		sc_start 32, 360000,10;
+		sc_start 35, 360000,5;
+		sc_start 40, 360000,10;
+		sc_start 41, 360000,10;
+		sc_start SC_INTFOOD, 1200000, 5;
+		sc_start SC_STRFOOD, 1200000, 5;
+		sc_start SC_DEXFOOD, 1200000, 5;
+		sc_start SC_AGIFOOD, 1200000, 5;
+		sc_start SC_VITFOOD, 1200000, 5;
+		sc_start SC_LUKFOOD, 1200000, 5;
+		percentheal 100,100;
+		atcommand "@repairall";
+		end;
+		}
+		sc_start 30, 360000,10;
+		sc_start 32, 360000,10;
+		percentheal 100,100;
+		atcommand "@repairall";
+}
+end;
+}
+}

@@ -1,0 +1,68 @@
+//===== FOX Ragnarök ======================================
+//= [ADM] odin | [ADM] well | [ADM] ramon
+//=========================================================
+function	script	VIP_MEN	{
+	mes "[^FF8000Mensageiro^000000]";
+	mes "Olá, como posso ajudá-l"+((Sex)?"o":"a")+" ?";
+	mes "Cada mensagem tem intervalo de 60 segundos para ser enviada.";
+	next;
+	//switch (select ("^00B2EE[  •  ]^000000 Procurar Grupo:^00B2EE[  •  ]^000000 Procurar Clã:^00B2EE[  •  ]^000000 Anuncio de Itens:^00B2EE[  •  ]^000000 Enviar Mensagem"))
+	switch (select ("^00B2EE[  •  ]^000000 Procurar Grupo:^00B2EE[  •  ]^000000 Procurar Clã:^00B2EE[  •  ]^000000 Enviar Mensagem"))
+	{
+		mes "[^FF8000Mensageiro^000000]";
+
+		case 1:
+		case 2:
+			callsub L_Confirm, "[Galaxy Ragnarök Vip] [Mensageiro]: "+strcharinfo(0)+" ~ "+jobname(Class)+" ~ Nv. "+BaseLevel+"/"+JobLevel+" procura um ["+((@menu == 1)?"Grupo":"Clã")+"] !", "0x"+((@menu == 1)?"00FF00":"FF0000");
+			break;
+		
+		/* TODO
+		case 3:
+			mes "Escolha a opção:";
+			next;
+			switch (select ("^00B2EE[  •  ]^000000 Comprar Item:^00B2EE[  •  ]^000000 Vender Item"))
+			{
+				mes "[^FF8000Mensageiro^000000]";
+
+				case 1:
+					mes "Digite o ID do item.";
+			}
+		*/
+		
+		case 3:
+		//case 4:
+			mes "Selecione a cor da mensagem:";
+			next;
+			switch (select ("^FFFFFFBranca","^EE6363Vermelha","^E8E8E8Cinza","^00CD00Verde","^5CACEEAzul"))
+			{
+				case 1: set .@color$, "0xFFFFFF"; break;
+				case 2: set .@color$, "0xEE6363"; break;
+				case 3: set .@color$, "0xE8E8E8"; break;
+				case 4: set .@color$, "0x00CD00"; break;
+				case 5: set .@color$, "0x5CACEE"; break;
+			}
+			mes "[^FF8000Mensageiro^000000]";
+			mes "Digite a mensagem:";
+			mes "Ela deve conter no máximo 130 caracteres.";
+			next;
+			input .@msg$;
+			mes "[^FF8000Mensageiro^000000]";
+			if (!getstrlen(.@msg$) || getstrlen(.@msg$) > 130)
+			{
+				mes "O tamanho não confere.";
+				close;
+			}
+			callsub L_Confirm, "[Galaxy Ragnarök Vip] [Mensageiro - "+strcharinfo(0)+"] "+.@msg$, .@color$;
+	}
+	
+	L_Confirm:
+		mes "Tem certeza que deseja enviar a mensagem ?";
+		next;
+		if (select ("^00B2EE[  •  ]^000000 Sim:^CD0000[  •  ]^000000 Não") == 2) close;
+		mes "[^FF8000Mensageiro^000000]";
+		mes "Mensagem enviada!";
+		close2;
+		announce getarg(0), bc_all, getarg(1);
+		end;
+	return;
+}

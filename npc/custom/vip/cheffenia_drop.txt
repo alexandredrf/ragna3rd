@@ -1,0 +1,100 @@
+-	script	Sample	-1,{
+function CustomRateCard;
+
+OnNPCKillEvent:
+// CustomRateCard( <MobID>,<CardID>,<Rate> );
+// Rate : 1 = 0.01%  /  1000 = 10%  /  10000 = 100%
+
+CustomRateCard( 1059,4132,50 );	//Abelha-Rainha
+//CustomRateCard( 1647,4359,50 );	//Algoz Eremes
+CustomRateCard( 2476,4601,50 );	//Amdarais
+CustomRateCard( 1511,4236,50 );	//Amon-Ra
+CustomRateCard( 1957,4451,50 );		//Ant Buyanne
+//CustomRateCard( 1651,4365,50 );	//Arquimaga Kathryne
+//CustomRateCard( 1650,4367,50 );	//Atirador de Elite Cecil
+CustomRateCard( 1785,4425,50 );	//Atroce
+//CustomRateCard( 1039,4147,50 );	//Bafomé
+CustomRateCard( 1874,4145,50 );	//Belzebu
+CustomRateCard( 1871,4441,50 );		//Bispo Decadente
+CustomRateCard( 2068,27126,50 );	//Boitatá
+//CustomRateCard( 1251,4318,50 );	//Cavaleiro da Tempestade
+//CustomRateCard( 2188,4526,50 );	//Celacanto Cruel
+//CustomRateCard( 2189,4528,50 );	//Celacanto Mutante
+//CustomRateCard( 2187,4527,50 );	//Celacanto Sombrio
+//CustomRateCard( 2190,4529,50 );	//Celacanto Violento
+//CustomRateCard( 3124,4697,50 );	//Charleston 03
+CustomRateCard( 2241,4566,50 );	//Cigana Trentini
+//CustomRateCard( 2236,4563,50 );	//Criador Flamel
+//CustomRateCard( 2239,4564,50 );	//Desordeira Gertie
+CustomRateCard( 1719,4386,50 );	//Detardeurus
+//CustomRateCard( 4559,50 );		//Satan Morroc
+CustomRateCard( 1046,4142,50 );	//Doppelganger
+CustomRateCard( 1389,4134,50 );	//Drácula
+CustomRateCard( 1112,4137,50 );	//Drake
+CustomRateCard( 1115,4123,50 );	//Eddga
+CustomRateCard( 1658,4352,50 );	//Egnigem Cenia [Chefe]
+CustomRateCard( 1157,4148,50 );	//Faraó
+//CustomRateCard( 2564,4556,50 );	//Fenrir
+CustomRateCard( 1150,4131,50 );	//Flor do Luar
+CustomRateCard( 1159,4121,50 );	//Freeoni
+CustomRateCard( 1312,4305,50 );	//General Tartaruga
+CustomRateCard( 1885,27162,50 ); 	//Gorynych
+//CustomRateCard( 2255,0,1 );		//Guardião Morto Kades
+CustomRateCard( 1252,4324,50 );	//Hatii
+CustomRateCard( 1832,4430,50 );	//Ifrit
+CustomRateCard( 1734,4403,50 );	//Kiel-D-01
+CustomRateCard( 2202,4525,50 );	//Kraken
+CustomRateCard( 1779,4419,50 );	//Ktullanux
+CustomRateCard( 1630,4372,50 );	//Lady Branca
+CustomRateCard( 1688,4376,50 );	//Lady Tanee
+CustomRateCard( 2156,4520,50 );	//Leak
+CustomRateCard( 1646,4357,50 );	//Lorde Seyren
+CustomRateCard( 1147,4146,20 );		//Maya
+CustomRateCard( 1708,4399,20 );		//Memória de Thanatos
+//CustomRateCard( 2240,4560,50 );	//Menestrel Alphoccio
+//CustomRateCard( 2238,4562,50 );	//Mestre Chen
+//CustomRateCard( 1648,4361,50 );	//Mestre-ferreiro Howard
+CustomRateCard( 1956,4457,50 );	//Naght Sieger
+CustomRateCard( 1087,4143,50 );	//Orc Herói
+//CustomRateCard( 2475,4603,50 );	//Origem da Maldição
+CustomRateCard( 1038,4144,50 );	//Osíris
+//CustomRateCard( 2235,4565,50 );	//Paladino Randel
+CustomRateCard( 1768,4408,50 );	//Pesar Noturno
+CustomRateCard( 2219,4534,50 );	//Polvo Gigante
+//CustomRateCard( 2237,4561,50 );	//Professora Celia
+CustomRateCard( 2087,4507,50 );	//Rainha Scaraba
+//CustomRateCard( 2165,4509,50 );	//Rainha Scaraba Dourada
+CustomRateCard( 1623,4342,50 );	//RSX-0806
+CustomRateCard( 1492,4263,50 );	//Samurai Encarnado
+CustomRateCard( 1272,4168,50 );	//Senhor das Trevas
+CustomRateCard( 1373,4276,50 );	//Senhor dos Mortos
+CustomRateCard( 1190,4135,50 );	//Senhor dos Orcs
+CustomRateCard( 1418,4330,50 );	//Serpente Suprema
+CustomRateCard( 2022,4456,50 );	//Sombra do Guardião
+//CustomRateCard( 1649,4363,50 );	//Sumo Sacerdotisa Margaretha
+//CustomRateCard( 3254,27020,50 );	//T W O
+CustomRateCard( 1583,4302,50 );	//Tao Gunka
+CustomRateCard( 1751,4407,50 );		//Valkyrie Randgris
+CustomRateCard( 1685,4374,50 );	//Vesper
+//CustomRateCard( 3074,4625,50 );	//Vigia do Tempo
+
+end;
+
+function	CustomRateCard	{
+	if( killedrid == getarg(0) && rand( 10000 ) <= getarg(2) ){
+			getitem getarg(1),1;
+			announce "[MvP] O jogador ["+strcharinfo(0)+"] dropou o item ["+getitemname( getarg(1) )+"]!",bc_all,0x00ff99;
+	} else {
+		if( killedrid == getarg(0) && rand( 10000 ) <= 2000 ){
+			set @ygg, rand(2);
+				if(@ygg == 1){
+					getitem 607,1;
+				} else {
+					getitem 608,1;
+				}
+	return;
+		}
+
+	}
+}
+}

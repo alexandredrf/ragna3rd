@@ -1,0 +1,131 @@
+function	script	ValueConvert	{
+	set .@num, atoi(""+getarg(0));
+	if ( .@num == 0 || .@num >= 2147483647 ) return getarg(0);
+	set .@l, getstrlen(""+.@num);
+	for ( set .@i,0; .@i < .@l; set .@i, .@i + 1 ) {
+		set .@num$, .@num % pow(10,.@i+1) / pow(10,.@i) + .@num$;
+			if ( (.@i+1) % 3 == 0 && .@i+1 != .@l ) set .@num$, ","+ .@num$;
+	}
+	return .@num$;
+}
+
+
+prontera,146,197,3	script	Estilista	4_M_NEWOZ,{
+	// Sets (no more '.' prefix variables - new rule) //////////////////////////////
+	set .@nome$,"^0055FFEstilista^000000";
+	setarray .@menu_name$,"Estilo de Cabelo","Cor de Cabelo","Cor de Roupa","Estilo de Roupa";
+	.@blacklist_cloth_0$ = "188,261";
+	.@blacklist_cloth_1$ = "188,261";
+	setarray .@min_style[0],getbattleflag( "min_hair_style" ),getbattleflag( "min_hair_color" ),getbattleflag( "min_cloth_color" ),getbattleflag( "min_body_style" );
+	setarray .@max_style[0],getbattleflag( "max_hair_style" ),getbattleflag( "max_hair_color" ),getbattleflag( "max_cloth_color" ),getbattleflag( "max_body_style" );
+	setarray .@look_type[0],LOOK_HAIR,LOOK_HAIR_COLOR,LOOK_CLOTHES_COLOR,LOOK_BODY2;
+	for(.@npc_menu$ = ""; .@i < getarraysize(.@menu_name$); ++.@i)
+		.@npc_menu$ += .@menu_name$[.@i] + ":";
+	/////////////////////////////////////////////////////////////////////
+	cutin "NINES02.bmp",2;
+	mes "[ " + .@nome$ + " ]";
+	mes "Olá seja bem vindo, eu sou o Super Estilista, então, o que deseja?";
+	mes " ";
+	for( .@i = 0; .@i < getarraysize(.@menu_name$); .@i++ )
+		mes "^0055FF"+.@menu_name$[.@i]+" atual: ^777777"+getlook(.@look_type[.@i])+" ^000000";
+	mes " ","^666666É necessário confirmar para mudar a aparência.^000000";
+	next;
+	.@style = (select(.@npc_menu$) - 1);
+	.@style_value = getlook( .@look_type[.@style] );
+	
+	
+	switch( .@style ){
+		case 0: .@blacklist$ = ","+getd( ".@blacklist_hairstyle_"+Sex+"$" )+","; break;
+		case 1: .@blacklist$ = ","+getd( ".@blacklist_haircolor_"+Sex+"$" )+","; break;
+		case 2: .@blacklist$ = ","+getd( ".@blacklist_cloth_"+Sex+"$" )+","; break;
+		case 3:
+			 if ( Class == JOB_RUNE_KNIGHT || Class == JOB_RUNE_KNIGHT_T ) break;
+		else if ( Class == JOB_ROYAL_GUARD || Class == JOB_ROYAL_GUARD_T ) break;
+		else if ( Class == JOB_WARLOCK || Class == JOB_WARLOCK_T ) break;
+		else if ( Class == JOB_SORCERER || Class == JOB_SORCERER_T ) break;
+		else if ( Class == JOB_RANGER || Class == JOB_RANGER_T ) break;
+		else if ( Class == JOB_MINSTREL || Class == JOB_MINSTREL_T ) break;
+		else if ( Class == JOB_WANDERER || Class == JOB_WANDERER_T ) break;
+		else if ( Class == JOB_MECHANIC || Class == JOB_MECHANIC_T ) break;
+		else if ( Class == JOB_GENETIC || Class == JOB_GENETIC_T ) break;
+		else if ( Class == JOB_GUILLOTINE_CROSS || Class == JOB_GUILLOTINE_CROSS_T ) break;
+		else if ( Class == JOB_SHADOW_CHASER || Class == JOB_SHADOW_CHASER_T ) break;
+		else if ( Class == JOB_ARCH_BISHOP || Class == JOB_ARCH_BISHOP_T ) break;
+		else if ( Class == JOB_SURA || Class == JOB_SURA_T ) break;
+		else {
+			.@body2 = 1; break;
+		}
+		default: 
+			break;
+	}
+
+	.@style_number = .@min_style[.@style];
+
+	addtimer 1000,strnpcinfo(0)+"::OnPCLogoutEvent";
+	do{
+		if ( .@body2 ) {
+			mes "[ " + .@nome$ + " ]";
+			mes "Desculpe, esta opção não está disponível para a sua classe.";
+			close3;
+		}
+			
+		message strcharinfo(0),.@menu_name$[.@style]+" : "+.@style_number+"";
+		.@removed = 0;
+		if( compare( .@blacklist$,","+.@style_number+"," ) ) {
+			message strcharinfo(0),"[ REMOVIDO ] "+.@menu_name$[.@style]+" : " + .@style_number;
+			.@removed = 1;
+			// setlook .@look_type[@style],.@min_style[@style];
+		} 
+		else {
+			setlook .@look_type[.@style],.@style_number;
+		}
+		
+		.@next = .@style_number + 1;
+		.@prev = .@style_number - 1;
+		if( .@next > .@max_style[.@style] ) .@next = .@min_style[.@style];
+		if( .@prev < .@min_style[.@style] ) .@prev = .@max_style[.@style];
+		
+		@select = prompt( (( .@backward )?"Voltar":"Avançar" )+" - [ ^777777"+(( .@backward )? .@prev:.@next )+"° Estilo^000000 ]",
+					(( !.@backward )?"Voltar":"Avançar" )+" - [ ^777777"+(( !.@backward )? .@prev:.@next )+"° Estilo^000000 ]",
+					"Pular para um específico",
+					( .@removed )?"":"^0055FFConfirmar este(a) "+.@menu_name$[.@style]+"^000000" );
+					
+		if( @select == 2 ) .@backward = !.@backward;
+		
+		switch(@select) {
+			case 1:
+			case 2:
+				.@style_number = (( .@backward )? .@prev:.@next );
+				break;
+			case 3:	
+				message strcharinfo(0),"Estilo disponível: "+.@min_style[.@style]+" ~ "+.@max_style[.@style]+".";
+				input .@style_number,.@min_style[.@style],.@max_style[.@style];
+				break;
+			case 4:
+				if( .@style_value == .@style_number ){
+					message strcharinfo(0),"Você já está utilizando este estilo.";
+					break;
+				}
+				.@success = 1;
+				if( .@success ){
+					message strcharinfo(0),"Curta seu(ua) novo(a) "+.@menu_name$[.@style]+".";
+					.@style_value = .@style_number;
+				}
+
+			default:
+				setlook .@look_type[.@style],.@style_value;
+				break;
+		}
+	}while( @select != 4 && @select != 255 );
+	mes "[ " + .@nome$ + " ]";
+	mes "Volte quando quiser.";
+	close2;
+	cutin "",255;
+	deltimer strnpcinfo(0)+"::OnPCLogoutEvent";
+
+OnPCLogoutEvent:
+	if( @select )
+		setlook .@look_type[.@style],.@style_value;
+	@select = 0;
+	end;
+}

@@ -1,0 +1,20 @@
+-	pointshop	MVPPoints	-1,#pontos_mvp,32000:10;
+-	itemshop	MoedasGalaxy	-1,32000,6438:75,6439:75,14616:1,14618:1,14617:1,14619:1,14620:1,14621:1,14536:1,14535:1,14537:1,12404:1,14600:1,14601:1,14542:1,14544:1,12299:10,14586:10,12710:10,12596:10,14538:10,12792:10;
+
+prontera,147,166,5	script	Loja de Moeda Galaxy#1	936,{
+	.@name$ = "^CC00CCLoja de Moeda Galaxy^000000";
+	mes "[ " + .@name$ + " ]";
+	mes "Deseja trocar seus pontos MvP por moedas Galaxy?";
+	mes "Aqui você pode trocar seus pontos por ^FF0000Moedas Galaxy^000000.";
+	mes "Você também pode comprar itens e suprimentos exclusivos com essas moedas.";
+	next;
+	switch (select("Trocar ^FF0000Moedas Galaxy^000000","Comprar moedas [MVP]")) {
+		case 1:
+			callshop "MoedasGalaxy", 0;
+			end;
+		case 2:
+			callshop ("MVPPoints", 1);
+			end;
+	}
+	end;
+}

@@ -1,0 +1,560 @@
+// Cash Shop Database
+// Contains the items sold in the ingame cash shop.
+//
+// Structure of Database:
+// Type,ItemID,Price
+//
+// Type:
+//    0: New
+//    1: Hot
+//    2: Limited
+//    3: Rental
+//    4: Gear
+//    5: Buff
+//    6: Heal
+//    7: Other
+//    8: Sale
+//
+// Price:
+//    Item cost, in cash points (#CASHPOINTS).
+0,19575,5000	//Chapéu de Dragão
+0,27162,10000	//Carta Gorynych
+//===================================================================
+1,6439,500
+1,6438,500
+//===================================================================
+// Equipamentos
+//===================================================================
+2,2383,30000	//Armadura de Brynhildr
+2,28394,25000	//Bracelete da Valquíria Mágica
+2,2630,30000	//Brisingamen
+2,2021,30000	//Ganbantein
+2,2181,30000	//Hervor
+2,2182,50000	//Hervor Alvitr
+2,2020,30000	//Jormungand
+2,2980,20000	//Luva dos Espíritos Malignos
+2,2541,30000	//Manto de Asfrika
+2,5918,20000	//Marcas de Comodo
+2,5985,20000	//Máscara da Nobreza
+2,2629,50000	//Megingjard
+2,1530,50000	//Mjollnir
+2,2410,30000	//Sleipnir
+//===================================================================
+// Visuais Topo
+//===================================================================
+3,19650,5000	//Adorno Arco-íris
+//3,19971,5000	//Adorno de Penas de Cisne
+3,20098,5000	//Adorno Vampiresco
+3,19518,5000	//Arco Íris
+3,19710,5000	//Asas da Vitória
+3,20218,5000	//Auréola dos Aesir
+3,19677,5000	//Auréola Espiritual
+3,31108,5000	//Balão de Fala (Abraços Grátis)
+3,31112,5000	//Balão de Fala (Hue Hue Br)
+3,31110,5000	//Balão de Fala (Procuro Grupo)
+3,31111,5000	//Balão de Fala (Procuro Membros)
+3,31109,5000	//Balão de Fala (Recruto para Clã)
+3,31038,5000	//Bandana Xadrez
+3,31331,5000	//Bao-Bao da Donzela Verde
+3,19585,5000	//Boina Alada Visual
+3,19904,5000	//Boina da Caveira
+3,19958,5000	//Boina da Lutadora de Rua
+3,20197,5000	//Boina de Amistr
+3,20284,5000	//Boina de Cerejeira
+3,20463,5000	//Boina Duplo-Tom
+3,20277,5000	//Boina Estudantil
+3,19292,5000	//Boina Selvagem
+3,19668,5000	//Boina Vermelha do Mensageiro
+3,20283,5000	//Boné Abençoado
+3,19986,5000	//Boné de Lunático
+3,19852,5000	//Boné de Pingu
+3,19935,5000	//Boné do D Fléchi
+3,20282,5000	//Boné do Mario Branco
+3,19834,5000	//Boné do Melhor Pai do Mundo
+3,20306,5000	//Boné do Príncipe Ali
+3,20383,5000	//Boneco da Artilharia Arcana
+3,20382,5000	//Boneco da Artilharia Caçadora
+3,19835,5000	//Bonequinha de Lif
+3,19827,5000	//Bonequinho de Amistr
+3,19831,5000	//Bonequinho de Filir
+3,19839,5000	//Bonequinho de Vanilmirth
+3,5909 ,5000	//Bravura dos Einherjar
+3,20062,5000	//Brilho do Sol Nascente
+3,20278,5000	//Cabeleira do Rei do Rock
+3,20287,5000	//Cabeleira do Rei do Rock Saiadim
+3,18740,5000	//Cabelo de Super Saiadim
+3,19957,5000	//Capacete de Motociclista
+3,20257,5000	//Capuz com Orelhas de Coelho
+3,20251,5000	//Capuz da Pastora
+3,20070,5000	//Capuz de Alpaca Fofinha
+3,19823,5000	//Capuz de Gatinho Fofinho
+3,31166,5000	//Capuz de Ursinho
+3,19746,5000	//Capuz do Coração Gelado
+3,19543,5000	//Capuz do Lobo Oliver
+3,19819,5000	//Capuz do Mestre Necromante
+3,31396,5000	//Capuz Trevoso
+3,19701,5000	//Capuz Vermelho
+3,19661,5000	//Cartola Adocicada
+3,19930,5000	//Cartola da Gótica-Valquíria
+3,19876,5000	//Cartola da Mekoro
+3,20499,5000	//Cartola da Pata de Gato
+3,20243,5000	//Cartola do Willie Wootan
+3,20381,5000	//Cartola Steampunk
+3,20130,5000	//Cartola Sussurrante
+3,19652,5000	//Cartola Visual de Mágico
+3,20449,5000	//Casal de Gatinhos
+3,19804,5000	//Cata-vento elegante
+3,19803,5000	//Cata-vento Vermelho
+3,19996,5000	//Cavalo Rei
+3,19515,5000	//Chapéu Amarelo com Pluma
+3,19521,5000	//Chapéu Antigo
+3,19922,5000	//Chapéu Arcebispal
+3,20324,5000	//Chapéu com Pombo
+3,20374,5000	//Chapéu Cyberpunk Florido
+3,19892,5000	//Chapéu da Amoeba Alada
+3,20219,5000	//Chapéu da Banda Sagrada
+3,20395,5000	//Chapéu da Bruxa Sombria
+3,20433,5000	//Chapéu da Catherine Johnson
+3,19759,5000	//Chapéu da Corporação Sombrinha
+3,19937,5000	//Chapéu da Fauna e Flora
+3,20027,5000	//Chapéu da Mimosa Rosa
+3,31390,5000	//Chapéu da Nevasca
+3,31125,5000	//Chapéu da Realeza Pirata
+3,5980 ,5000	//Chapéu da Zenny Drédiful
+3,19772,5000	//Chapéu de Abelha
+3,19917,5000	//Chapéu de Abóbora Iluminado
+3,31193,5000	//Chapéu de Ahat
+3,20346,5000	//Chapéu de Batedor
+3,31088,5000	//Chapéu de Bicho Papão
+3,19910,5000	//Chapéu de Bruxa Brilhante
+3,20174,5000	//Chapéu de Bruxa Laranja
+3,19903,5000	//Chapéu de Bruxa Maligna
+3,19893,5000	//Chapéu de Bruxinha
+3,20200,5000	//Chapéu de Camponesa
+3,20044,5000	//Chapéu de Carmen Miranda
+3,20398,5000	//Chapéu de Coelho Maldito
+3,19824,5000	//Chapéu de Druida Maligno
+3,31158,5000	//Chapéu de Esquilo
+3,19913,5000	//Chapéu de Esterco
+3,19544,5000	//Chapéu de Gatinho Assustado
+3,19976,5000	//Chapéu de Gato Natalino
+3,31159,5000	//Chapéu de Jormungand
+3,20155,5000	//Chapéu de Lady Emplumado
+3,19816,5000	//Chapéu de Peco
+3,19682,5000	//Chapéu de Poring Natalino
+3,20112,5000	//Chapéu de Praia Azul
+3,20012,5000	//Chapéu Deciduai
+3,19577,5000	//Chapéu do 10º Aniversário
+3,19756,5000	//Chapéu do Amor Materno
+3,19656,5000	//Chapéu do Bardo Verde
+3,20148,5000	//Chapéu do Dartanham
+3,19548,5000	//Chapéu do Gama-sama
+3,20242,5000	//Chapéu do Jack Frost
+3,20113,5000	//Chapéu do Oráculo
+3,19676,5000	//Chapéu do Poring Prismático
+3,19685,5000	//Chapéu do Super Poring Noel
+3,19934,5000	//Chapéu Flamejante
+3,31188,5000	//Chapéu Gótico-Lolita
+3,19602,5000	//Chapéu Invisível
+3,20109,5000	//Chapéu Jolly Roger
+3,20450,5000	//Chapéu Multiclasse
+3,19639,5000	//Chapéu Rural
+3,20171,5000	//Chapéu Torta Holandesa
+3,19956,5000	//Chapéu Vermelho de Fanfarra
+3,19984,5000	//Chapéu Visual de Inverno
+3,31314,5000	//Chifres de Oni Adornados
+3,19862,5000	//Chifres de Succubus
+3,19549,5000	//Chifres Enormes
+3,19836,5000	//Chifres Majestosos do Bafomé
+3,20470,5000	//Choco-elmo
+3,19881,5000	//Coelhinho Carinhoso
+3,19878,5000	//Coelho de Pano
+3,19751,5000	//Coroa da Luz e Trevas
+3,31325,5000	//Coroa da Rainha Scaraba
+3,19865,5000	//Coroa de Bufão
+3,20033,5000	//Coroa de Dewata
+3,19774,5000	//Coroa do Imperador
+3,20452,5000	//Coroa do Príncipe Moranguinho
+3,20135,5000	//Coroa dos 11 Anos e um Segredo
+3,19960,5000	//Correntes de Marionete
+3,19524,5000	//Cospobre de Rocker
+3,19517,5000	//Crista de Galo
+3,31046,5000	//Diadema de Rosas Brancas
+3,19546,5000	//Disfarce de Valquíria
+3,20432,5000	//Elmo da Khalitzburg
+3,19555,5000	//Elmo da Lua Crescente
+3,31244,5000	//Elmo das Falcoeiras de Rapina
+3,19721,5000	//Elmo das Trevas
+3,31312,5000	//Elmo de Hades
+3,19526,5000	//Elmo de Sucata
+3,20443,5000	//Elmo de Unicórnio
+3,20393,5000	//Elmo do Alquimista Metálico
+3,20472,5000	//Elmo do Anjo
+3,20134,5000	//Elmo do Cavaleiro Branco
+3,19841,5000	//Elmo do Espírito do Dragão
+3,19884,5000	//Elmo do Gato Cavaleiro
+3,19598,5000	//Elmo do Rei do Norte
+3,20316,5000	//Elmo do Serafim
+3,20377,5000	//Elmo do Visual de Aviador
+3,19807,5000	//Elmo do Xogum
+3,20011,5000	//Elmo Primarino
+3,31160,5000	//Elmo Rúnico Dourado
+3,19840,5000	//Elmo Solar Dourado
+3,19574,5000	//Elmo Sombrio de Cristal
+3,20401,5000	//Espírito angelical
+3,20099,5000	//Esplêndido Brilhante
+3,19777,5000	//Estrelinha Lumma
+3,19944,5000	//Fadinha Angelical
+3,31180,5000	//Faixa do Shurão da Preula
+3,20268,5000	//Família Eclipse Dorminhoca
+3,20133,5000	//Fantasia de Poring
+3,19607,5000	//Filhote de Fênix
+3,20431,5000	//Fita Mágica de Cetim
+3,19767,5000	//Fivela de Sakura
+3,18741,5000	//Fogo Esmeralda
+3,20167,5000	//Fone de Ouvido de Deviruchi
+3,20175,5000	//Fone de Ouvido de Diabolik
+3,20317,5000	//Fones de Ouvido Nekomimi
+3,20482,5000	//Gaiola Florida
+3,19883,5000	//Gorro da Piamette
+3,19990,5000	//Gorro de Coelho de Inverno
+3,19936,5000	//Gorro de Lã do Ioxi
+3,20196,5000	//Gorro de Leopardo
+3,19697,5000	//Gorro de Natal do Rudolph
+3,19702,5000	//Gorro Natalino
+3,19987,5000	//Gorro Visual de Inverno
+3,31132,5000	//Guirlanda Natalina
+3,19724,5000	//Kafra V.I.P.
+3,19600,5000	//Kiel de Pelúcia
+3,19678,5000	//Lacinho com Sinos
+3,19709,5000	//Lacinho de Fruto de Yggdrasil
+3,19929,5000	//Laço Clássico
+3,19718,5000	//Laço de Niflheim
+3,31200,5000	//Laço Esplêndido
+3,19715,5000	//Lenço da Memória Secreta
+3,20168,5000	//Lenço de Caveira
+3,20468,5000	//Máscara da Gorila Chita
+3,20234,5000	//Máscara de Bafomé
+3,19951,5000	//Máscara de DanbRO
+3,19920,5000	//Máscara de Sussurro Assustador
+3,20006,5000	//Máscara do Chefão do Mal
+3,31179,5000	//Máscara Lupina
+3,20300,5000	//Máscara Vento da Colina
+3,19742,5000	//Milagre de Asgard
+3,20467,5000	//Mini Coroa da Primavera
+3,20172,5000	//Miniabóbora Elegante
+3,19522,5000	//Minicoroa
+3,19802,5000	//Nove Caudas Dorminhoca
+3,19520,5000	//Nuvem Chuvosa
+3,19519,5000	//Nuvem com Raios
+3,19649,5000	//Orelhas Brancas de Gatinho
+3,20262,5000	//Orelhas de Raposa
+3,31139,5000	//Orelhas do Coelho Branco
+3,31249,5000	//Orelhas do Coelho da Lua
+3,19879,5000	//Orelhas Fabulosas
+3,20269,5000	//Orelhas Incinerantes
+3,20198,5000	//Orelhas Peludinhas
+3,19780,5000	//Orelhinhas de Coelhinho de Lã
+3,19516,5000	//Passarinho de Canto Agudo
+3,19959,5000	//Penteado de Argiope
+3,31165,5000	//Pequeno Aprendiz
+3,19703,5000	//Peruca Afro Blackpower
+3,19705,5000	//Peruca Afro Loira
+3,19704,5000	//Peruca Afro Ruiva
+3,31149,5000	//Peruca da Nidhogg
+3,31329,5000	//Peruca de Alice
+3,31062,5000	//Peruca de Eleanor
+3,20248,5000	//Peruca de Saiadim
+3,19684,5000	//Peruca do Visual Carnavalesco
+3,19775,5000	//Peruca Maravilinda
+3,20435,5000	//Pingente Lunar
+3,19762,5000	//Pombinhos Apaixonados
+3,20458,5000	//Poring da Rosa Selvagem
+3,20183,5000	//Presença Misteriosa
+3,19773,5000	//Presilha de Angeling
+3,19771,5000	//Presilha de Borboleta
+3,19806,5000	//Presilha do Festival
+3,19687,5000	//Presilha Perfumada
+3,19540,5000	//Protetor com Coelhinhos
+3,20451,5000	//Quepe da Estrela
+3,19545,5000	//Quepe da Ostentação
+3,19657,5000	//Quepe do Capitão
+3,31202,5000	//Quepe do Serumaninho
+3,31028,5000	//Sobrepeliz de Gatinho
+3,19507,5000	//Sol Risonho
+3,19614,5000	//Supervisual de Aprendiz
+3,19911,5000	//Telhado
+3,19874,5000	//Tiara Carnavalesca
+3,31040,5000	//Tiara das Plumas Mágicas
+3,19991,5000	//Tiara de Galanthus
+3,19729,5000	//Tiara de Gatinha Kafra
+3,20069,5000	//Tiara de Grifo Real
+3,19686,5000	//Tiara de Papai Noel
+3,19589,5000	//Tiara de Randgris
+3,19768,5000	//Tiara de Sakura
+3,19573,5000	//Tiara do Amor
+3,19880,5000	//Tiara Estelar
+3,19681,5000	//Tiara Prateada 
+3,19627,5000	//Tiara Satélite 
+3,19547,5000	//Touca de Anime
+3,19875,5000	//Touca de Coelho
+3,19533,5000	//Touca de Esporo
+3,20032,5000	//Turbante do Oráculo
+3,19707,5000	//Urso Polar
+3,20220,5000	//Véu da Meia-Noite
+3,20217,5000	//Véu das Mil e Uma Noites
+3,19760,5000	//Véu do Arco-Íris
+3,20080,5000	//Visual de Plumas e Paetês
+3,20266,5000	//Zíper Secreto
+//===================================================================
+// Visuais Meio
+//===================================================================
+4,31168,5000	//Abafadores de Orelha de Carneiro
+4,19509,5000	//Asas de Borboleta
+4,19826,5000	//Asinhas do Inverno
+4,19752,5000	//Asinhas Elegantes
+4,20439,5000	//Aura Solar
+4,20404,5000	//Benção Angelingal
+4,19550,5000	//Bochechas Coradas
+4,20209,5000	//Bolhas de Sabão
+4,20255,5000	//Candura do Amor
+4,19679,5000	//Cara de Espanto
+4,20406,5000	//Chapéu de Andrômeda
+4,20430,5000	//Crânios Etéreos de Morroc
+4,19291,5000	//Doge Fofinho
+4,20399,5000	//Fantasia do Tengu Corvo
+4,19542,5000	//Fantasma Travesso
+4,20154,5000	//Folhas Outonais
+4,20319,5000	//Fone da Megarine Louca
+4,20311,5000	//Fone da Ratishune Meeku
+4,20131,5000	//Fone dos Vocalroks
+4,20116,5000	//Fones de Sereia
+4,20318,5000	//Fones do Pikachiu
+//4,31089,5000	//Fúria dos Shuras
+4,31186,5000	//Gatinho Preto
+4,20195,5000	//Gato Rabugento
+//4,18744,5000	//Gotas da Via Láctea
+4,31187,5000	//Laço da Princesa Guerreira
+4,18742,5000	//Luar de Cristal
+4,19801,5000	//Máscara da ANBU
+4,19680,5000	//Máscara da Criança Travessa
+4,20397,5000	//Máscara de Jakk
+4,19918,5000	//Máscara de Lude
+//4,19924,5000	//Máscara de Odin
+4,19919,5000	//Máscara de Quve
+4,20176,5000	//Máscara Feliz do Pierrot
+4,19554,5000	//Máscara Tradicional
+4,20314,5000	//Óculos da Gaga
+4,20115,5000	//Óculos do Sabe-Tudo
+4,19830,5000	//Óculos Hi-Ban
+4,19722,5000	//Óculos Intelectuais
+4,19603,5000	//Óculos Invisíveis
+4,20108,5000	//Óculos Julieta de Quartzo Rubi
+4,19954,5000	//Óculos Visuais 3D
+4,19877,5000	//Olho do Beholder
+4,19787,5000	//Olhos de Valquíria
+4,19912,5000	//Olhos Felinos
+4,20298,5000	//Orelhas Brancas de Lunático
+4,20144,5000	//Orelhas de Elfo Ancestral
+4,19776,5000	//Orelhas de Fada Animada
+4,19769,5000	//Orelhas de Fada Travessa
+4,31120,5000	//Orelhas de Vampiro
+4,20136,5000	//Orelhas dos 11 Anos e um Segredo
+4,31167,5000	//Orelhas Pretas de Lunático
+4,20010,5000	//Orelhas Solares
+4,19510,5000	//Parafusos Soltos
+4,31301,5000	//Piscadela
+4,19871,5000	//Ritmo do Momento
+4,19551,5000	//Símbolo Élfico
+4,19638,5000	//Sr. Sorriso
+4,19511,5000	//Tapa-Olho Estiloso
+4,19512,5000	//Tapa-Olho Fashion
+4,19882,5000	//Vaso de Planta Anti-Z
+4,5329 ,5000	//Venda Legítima da Takius
+4,20295,5000	//Visor de Quartzo-Poring
+4,20145,5000	//Visor do Ciborgue
+4,19587,5000	//Visual do Rei Poring
+//===================================================================
+// Visuais Baixo
+//===================================================================
+5,20279,5000	//Apiutube
+5,31264,5000	//Asinhas Elegantes (Baixo)
+5,31289,5000	//Asinhas Estilosas (Baixo)
+5,20407,5000	//Aura da Fúria
+5,20285,5000	//Aura de Amatsu
+5,5914, 5000	//Aura Esplêndida
+5,20132,5000	//Aura Fantasmagórica
+5,20202,5000	//Balão de Deviruchi
+5,20344,5000	//Balões de Festa
+5,20015,5000	//Barba Charmosa
+5,19528,5000	//Bevor de Plástico
+5,19513,5000	//Bico de Galinha
+5,19514,5000	//Bigode de Vassoura
+5,31209,5000	//Cabelo Longo Branco
+5,31208,5000	//Cabelo Longo Loiro
+5,20441,5000	//Cachecol com Laço
+5,20239,5000	//Cachecol de Lutie
+5,20405,5000	//Cachecol do Eremes
+5,31178,5000	//Cachecol em Chamas
+5,31057,5000	//Cachecol Preto do Eremes
+5,19770,5000	//Caneca de Chá Oriental
+5,20462,5000	//Capa com Capuz de Gatinho
+5,31189,5000	//Capa Vermelha de Gatinho
+5,31199,5000	//Cavanhaque Bifurcado
+5,20313,5000	//CD Labial
+5,20054,5000	//Chupeta de Neném
+5,31395,5000	//Conhecimento Flutuante
+5,19553,5000	//Disfarce do Assassino
+5,20448,5000	//Dobra de Água
+5,31121,5000	//Estola do Demônio
+5,20034,5000	//Familiar de Estimação
+5,20071,5000	//Filhotinho de Worg
+//5,20240,5000	//Flocos de Neve
+5,19541,5000	//Flor Amável Branca
+5,19552,5000	//Flor de Plástico
+5,31300,5000	//Gatchecol
+5,20326,5000	//Gola Escolar de Marinheiro
+5,19952,5000	//Goma de Mascar Visual
+5,19992,5000	//Hálito Gelado
+5,31152,5000	//Lacinho Vermelho da Piamette
+5,31045,5000	//Laço Azul Delicado
+5,31093,5000	//Lanterna das Fadas
+5,20280,5000	//Lápis do Ansioso
+5,20369,5000	//Maria-Chiquinha Azul
+5,20370,5000	//Maria-Chiquinha Branca
+5,20368,5000	//Maria-Chiquinha Castanha
+5,20364,5000	//Maria-Chiquinha Loira
+5,20342,5000	//Maria-Chiquinha Preta
+5,20366,5000	//Maria-Chiquinha Roxa
+5,20365,5000	//Maria-Chiquinha Verde
+5,20367,5000	//Maria-Chiquinha Vermelha
+5,31134,5000	//Maritaca Faladeira
+5,19566,5000	//Máscara do Xogum
+5,19604,5000	//Máscara Invisível
+5,20355,5000	//Mecha de Cabelo Azul
+5,20356,5000	//Mecha de Cabelo Branco
+5,20354,5000	//Mecha de Cabelo Castanho
+5,20350,5000	//Mecha de Cabelo Loiro
+5,20341,5000	//Mecha de Cabelo Preto
+5,20352,5000	//Mecha de Cabelo Roxo
+5,20351,5000	//Mecha de Cabelo Verde
+5,20353,5000	//Mecha de Cabelo Vermelho
+5,20349,5000	//Meu Amigo Pingu
+5,20286,5000	//Óculos da Persona
+5,19785,5000	//Pão de Forma Sem Casca
+5,5979, 5000	//Penas Clampi ®
+//5,20457,5000	//Penas Coloridas de Brasilis
+5,19805,5000	//Pergaminho dos Selos
+5,31383,5000	//Peruca Azul de Waifu
+5,19683,5000	//Pirulito Azedinho
+5,20362,5000	//Rabo de Cavalo Azul
+5,20363,5000	//Rabo de Cavalo Branco
+5,20361,5000	//Rabo de Cavalo Castanho
+5,20357,5000	//Rabo de Cavalo Loiro
+5,20340,5000	//Rabo de Cavalo Preto
+5,20359,5000	//Rabo de Cavalo Roxo
+5,20358,5000	//Rabo de Cavalo Verde
+5,20360,5000	//Rabo de Cavalo Vermelho
+5,31316,5000	//Revoada de Borboletas
+5,20035,5000	//Rosa Celeste
+5,19726,5000	//Rosa da Sedução
+5,31055,5000	//Sopra-Poring de Sabão
+5,19817,5000	//Sopro do Ifrit
+5,20798,5000	//Traje do Ceifeiro
+5,19713,5000	//Trevo Visual de Quatro Folhas
+5,20487,5000	//Valsa da Primavera
+5,20315,5000	//Visor Holográfico
+5,31164,5000	//Xale do Xerloque
+//===================================================================
+// Visuais Capa
+//===================================================================
+6,20511,5000	//Asas Azuis de Fada
+6,20504,5000	//Asas da Sarakura
+6,20727,5000	//Asas Douradas da Justiça
+6,20764,5000	//Asas Negras do Arcanjo
+6,20514,5000	//Espada de Thanatos
+6,20506,5000	//Manto Invisível
+6,20507,5000	//Mochila de Poring
+6,20746,5000	//Visual de Asas da Fênix
+6,20761,5000	//Visual de Asas de Alfheim
+//===================================================================
+// Cartas
+//===================================================================
+7,4132,10000	//Carta Abelha-Rainha
+7,4359,50000	//Carta Algoz Eremes
+7,4601,20000	//Carta Amdarais
+7,4236,10000	//Carta Amon-Ra
+7,4054,10000	//Carta Angeling
+7,4451,20000	//Carta Ant Buyanne
+7,4365,20000	//Carta Arquimaga Kathryne
+7,4367,10000	//Carta Atirador de Elite Cecil
+7,4425,10000	//Carta Atroce
+7,4147,10000	//Carta Bafomé
+7,4145,20000	//Carta Belzebu
+7,4441,50000	//Carta Bispo Decadente
+7,27126,30000	//Carta Boitatá
+7,4318,10000	//Carta Cavaleiro da Tempestade
+7,4526,20000	//Carta Celacanto Cruel
+7,4528,20000	//Carta Celacanto Mutante
+7,4527,10000	//Carta Celacanto Sombrio
+7,4529,20000	//Carta Celacanto Violento
+7,4697,25000	//Carta Charleston 03
+7,4566,10000	//Carta Cigana Trentini
+7,4563,10000	//Carta Criador Flamel
+7,4564,10000	//Carta Desordeira Gertie
+7,4386,10000	//Carta Detardeurus
+7,4174,20000	//Carta Deviling
+7,4559,10000	//Carta do Satan Morroc
+7,4142,10000	//Carta Doppelganger
+7,4134,10000	//Carta Drácula
+7,4137,10000	//Carta Drake
+7,4123,10000	//Carta Eddga
+7,4352,10000	//Carta Egnigem Cenia [Chefe]
+7,4148,10000	//Carta Faraó
+7,4556,50000	//Carta Fenrir
+7,4131,10000	//Carta Flor do Luar
+7,4121,10000	//Carta Freeoni
+7,4305,20000	//Carta General Tartaruga
+7,4047,20000	//Carta Ghostring
+7,4324,20000	//Carta Hatii
+7,4430,10000	//Carta Ifrit
+7,4403,20000	//Carta Kiel-D-01
+7,4525,10000	//Carta Kraken
+7,4419,10000	//Carta Ktullanux
+7,4372,10000	//Carta Lady Branca
+7,4376,20000	//Carta Lady Tanee
+7,4520,10000	//Carta Leak
+7,4357,30000	//Carta Lorde Seyren
+7,4146,50000	//Carta Maya
+7,4198,10000	//Carta Maya Macho
+7,4399,60000	//Carta Memória de Thanatos
+7,4560,10000	//Carta Menestrel Alphoccio
+7,4562,10000	//Carta Mestre Chen
+7,4361,10000	//Carta Mestre-ferreiro Howard
+7,4457,30000	//Carta Naght Sieger
+7,4143,10000	//Carta Orc Herói
+7,4603,10000	//Carta Origem da Maldição
+7,4144,10000	//Carta Osíris
+7,4565,10000	//Carta Paladino Randel
+7,4408,20000	//Carta Pesar Noturno
+7,4534,10000	//Carta Polvo Gigante
+7,4561,10000	//Carta Professora Celia
+7,4507,10000	//Carta Rainha Scaraba
+7,4509,10000	//Carta Rainha Scaraba Dourada
+7,4342,10000	//Carta RSX-0806
+7,4263,30000	//Carta Samurai Encarnado
+7,4168,10000	//Carta Senhor das Trevas
+7,4276,10000	//Carta Senhor dos Mortos
+7,4135,10000	//Carta Senhor dos Orcs
+7,4330,10000	//Carta Serpente Suprema
+7,4456,20000	//Carta Sombra do Guardião
+7,4363,10000	//Carta Sumo Sacerdotisa Margaretha
+7,27020,10000	//Carta T W O
+//7,4302,30000	//Carta Tao Gunka
+7,4407,30000	//Carta Valkyrie Randgris
+7,4374,10000	//Carta Vesper
+7,4625,25000	//Carta Vigia do Tempo
+//===================================================================
+
+
+

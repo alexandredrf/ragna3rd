@@ -1,0 +1,21 @@
+//===== FOX Ragnarök ======================================
+//= [ADM] odin | [ADM] well | [ADM] ramon
+//=========================================================
+-	script	hold	-1,{
+
+	OnInit:
+		bindatcmd("hold", strnpcinfo(3)+"::OnHold");
+		end;
+
+	OnHold:
+		if ( !@Hold ) {
+			set @Hold, 1;
+			message strcharinfo(0), "Hold mode está ON.";
+			pcblockmove 0,1;
+		} else {
+			set @Hold, 0;
+			message strcharinfo(0), "Hold mode está OFF.";
+			pcblockmove 0,0;
+		}
+
+}

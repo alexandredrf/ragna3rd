@@ -1,0 +1,203 @@
+//===== FOX Ragnarök ======================================
+//= [ADM] odin | [ADM] well | [ADM] ramon
+//=========================================================
+// Garota Terra
+// *********************************************************************
+
+prontera,161,193,4	script	Garota Terra#1	864,{
+	mes "^FF1493[  Garota Terra  ]^000000";
+	mes (gettime(3)>= 6&&gettime(3)<= 12?"Bom dia!":(gettime(3)>=13&&gettime(3)<=18?"Boa Tarde":"Boa Noite"))+", ^008aff"+strcharinfo(0)+"^000000";
+	mes "Bem-vindo à comunidade.";
+	mes "Como posso ajudá-lo hoje?";
+	next;
+	switch( select("^00B2EE[  •  ]^000000 Serviço Normal") )
+	{
+		case 1:
+			mes "^FF1493[  Garota Terra  ]^000000";
+			mes "Esta é a seção de Serviço Normal, acessível por todos os usuários.";
+			next;
+			switch( select("^00B2EE[  •  ]^000000 ^0000FFSistema Bancário^000000:^00B2EE[  •  ]^000000 ^FF0000Leilão^000000:^00B2EE[  •  ]^000000 ^FFA500Emp Breaker Room^000000:^00B2EE[  •  ]^000000 ^808080Repair Test Room^000000"))
+			{
+// ************************************* Repair Test Room ******************************************************************************
+				case 4:
+					mes "^FF1493[  Garota Terra  ]^000000";
+					mes "Deseja entrar na sala de testes para reparos Segunda Edição??";
+					mes "Isso está disponível para todos.";
+					next;
+					if( select("Acessar a Room:Não, obrigado") == 2 )
+					{
+						mes "^FF1493[  Garota Terra  ]^000000";
+						mes "Perfeito, encontre-me se você quiser algum outro serviço.";
+						close;
+					}
+
+					set @TerraGirl_out, atoi(strnpcinfo(2));
+					warp "quiz_02",249,384;
+					end;
+
+// ************************************* Empe Breaker Room ******************************************************************************
+				case 3:
+					mes "^FF1493[  Garota Terra  ]^000000";
+					mes "Deseja entrar na sala de testes para Emperium Breaker?";
+					mes "Isso está disponível para todos.";
+					next;
+					if( select("Acessar a Room:Não, obrigado") == 2 )
+					{
+						mes "^FF1493[  Garota Terra  ]^000000";
+						mes "Perfeito, encontre-me se você quiser algum outro serviço.";
+						close;
+					}
+
+					set @TerraGirl_out, atoi(strnpcinfo(2));
+					warp "quiz_02",45,383;
+					end;
+
+// ************************************* BANCO ******************************************************************************
+				case 1:
+					set @This_Day, (2008 - gettime(7)) + gettime(8); // Day of the Year From 1/1/2008
+					set @Income, 0;
+					set @Total_Income, 0;
+					if( #kafrabank > 0 && @This_Day > #Bank_LastIncome && #Bank_LastIncome > 0 )
+					{ // Calculates Incomes
+						for( set .@i, #Bank_LastIncome; .@i <= @This_Day; set .@i, .@i + 1 )
+						{
+							set @Income, (#kafrabank + @Total_Income) / 10000; // 0.01% Daily Income
+							set @Total_Income, @Total_Income + @Income;
+						}
+					}
+
+					set #Bank_LastIncome, @This_Day; // Reset Income
+
+					mes "[Banqueiro]";
+					mes "Bem-vindo ao Serviço Bancário.";
+					if( #kafrabank < 1 )
+					{
+						mes "Você ainda não possui uma conta bancária.";
+						next;
+						set @Option, select("Abrir uma conta...") - 1;
+					}
+					else
+					{
+						if( @Total_Income > 1000000000 - #kafrabank )
+							set @Total_Income, 1000000000 - #kafrabank;
+
+						mes "Saldo Anterior: ^0000FF" + #kafrabank + "^000000 zeny.";
+						mes "Juros Diários (0.1%): ^0000FF" + @Total_Income + "^000000 zeny.";
+						set #kafrabank, #kafrabank + @Total_Income;
+						mes "Saldo Atual: ^0000FF" + #kafrabank + "^000000 zeny.";
+						next;
+						set @Option, select("Depositar Zeny:Retirar Zeny");
+					}
+
+					switch( @Option )
+					{
+						case 0: // Abrir Cuenta
+							mes "[Banqueiro]";
+							mes "Em nosso serviço bancario você pode abrir uma conta com um mínimo de ^0000FF1.000 zeny^000000.";
+							mes "Seu dinheiro ficará seguro comigo e você ganhará extra 0.1% de Juros Diários.";
+							next;
+							mes "[Banqueiro]";
+							mes "Com quanto você quer abrir a conta?";
+							next;
+						case 1: // Depositar Zeny
+							if( @Option == 1 )
+							{
+								mes "[Banqueiro]";
+								mes "Diga-me o quanto você deseja depositar.";
+								mes "Mínimo ^0000FF1.000 zeny^000000.";
+								mes "Máximo ^0000FF10.000.000 zeny^000000.";
+								next;
+							}
+							
+							input @Amount;
+							if( @Amount < 1000 || @Amount > 10000000 )
+							{
+								mes "[Banqueiro]";
+								mes "Seu depósito não respeita os limites.";
+								mes "Mínimo ^0000FF1.000 zeny^000000.";
+								mes "Máximo ^0000FF10.000.000 zeny^000000.";
+								close;
+							}
+							
+							if( Zeny < @Amount )
+							{
+								mes "[Banqueiro]";
+								mes "Você não tem Zeny suficiente para o depósito indicado.";
+								close;
+							}
+
+							if( @Amount > 1000000000 - #kafrabank )
+							{
+								mes "[Banqueiro]";
+								mes "O máximo de Zeny que você pode ter em sua conta é:";
+								mes "1.000.000.000 zeny";
+								mes "Você não pode prosseguir com o depósito.";
+								close;
+							}
+
+							set Zeny, Zeny - @Amount;
+							specialeffect 10;
+
+							mes "[Banqueiro]";
+							mes "Saldo Anterior: ^0000FF" + #kafrabank + "^000000 zeny.";
+							set #kafrabank, #kafrabank + @Amount;
+							mes "Tu Depósito: ^0000FF" + @Amount + "^000000 zeny.";
+							mes "Saldo Atual: ^0000FF" + #kafrabank + "^000000 zeny.";
+							break;
+						case 2: // Retirar Zeny
+							mes "[Banqueiro]";
+							mes "Dime cuanto deseas retirar.";
+							mes "Saldo Atual: ^0000FF" + #kafrabank + "^000000 zeny.";
+							mes "Mínimo ^0000FF1 zeny^000000.";
+							mes "Máximo ^0000FF10.000.000 zeny^000000.";
+							next;
+
+							input @Amount;
+							if( @Amount < 1 || @Amount > 10000000 )
+							{
+								mes "[Banqueiro]";
+								mes "Seu retiro não respeita os limites.";
+								mes "Mínimo ^0000FF1 zeny^000000.";
+								mes "Máximo ^0000FF10.000.000 zeny^000000.";
+								close;
+							}
+							
+							if( #kafrabank < @Amount )
+							{
+								mes "[Banqueiro]";
+								mes "Você não tem o suficiente de Zeny na conta para o retiro.";
+								close;
+							}
+
+							if( @Amount > 1000000000 - Zeny )
+							{
+								mes "[Banqueiro]";
+								mes "O máximo de Zeny que você pode ter em seu personagem é:";
+								mes "1.000.000.000 zeny";
+								mes "Você não pode prosseguir com a retirada.";
+								close;
+							}
+
+							set Zeny, Zeny + @Amount;
+							specialeffect2 10;
+
+							mes "[Banqueiro]";
+							mes "Saldo Anterior: ^0000FF" + #kafrabank + "^000000 zeny.";
+							set #kafrabank, #kafrabank - @Amount;
+							mes "Tu Retiro: ^0000FF" + @Amount + "^000000 zeny.";
+							mes "Saldo Atual: ^0000FF" + #kafrabank + "^000000 zeny.";
+							break;
+					}
+					close;
+					
+// ************************************* ITEMMALL ***************************************************************************
+				case 2:
+					mes "^FF1493[  Garota Terra  ]^000000";
+					mes "Os leilões encontram o que os jogadores estão leiloando e você pode fazer seus negócios.";
+					mes "Feche esta janela para continuar.";
+					close2;
+					OpenAuction;
+					end;
+			}
+	}
+}
